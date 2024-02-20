@@ -60,6 +60,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Person.class);
         configuration.addAnnotatedClass(PersonDetail.class);
         configuration.addAnnotatedClass(Fee.class);
+        configuration.addAnnotatedClass(Note.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name) {

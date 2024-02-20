@@ -27,6 +27,7 @@ public class PersonDetail
 
     @OneToOne
     @MapsId
+    @ToString.Exclude
     private Person person;
 
     public PersonDetail(String address, int zip, String city, int age)

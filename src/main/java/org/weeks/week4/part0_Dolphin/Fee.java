@@ -19,9 +19,12 @@ public class Fee
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
     private int amount;
+
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDate payDate;
 
     @ManyToOne
+    @ToString.Exclude
     private Person person;
 
     public Fee(int amount, LocalDate payDate)

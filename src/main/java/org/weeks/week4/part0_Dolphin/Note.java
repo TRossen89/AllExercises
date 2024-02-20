@@ -18,15 +18,20 @@ public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-
+    private Integer id;
     @Column(name = "note")
-    String note;
+    private String note;
 
     @Column(columnDefinition = "TIMESTAMP")
-    LocalDateTime timeStamp;
+    private LocalDateTime timeStamp;
 
-    @Column(name = "created_by")
-    String createdBy;
+    @ManyToOne
+    @ToString.Exclude
+    private Person createdBy;
 
+    public Note(String note, LocalDateTime timeStamp, Person createdBy) {
+        this.note = note;
+        this.timeStamp = timeStamp;
+        this.createdBy = createdBy;
+    }
 }

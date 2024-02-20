@@ -26,18 +26,23 @@ public class Person
     @OneToOne(mappedBy="person", cascade = CascadeType.ALL)
     private PersonDetail personDetail;
 
+
+    // Relationer 1:m
+
+
+    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
+    private Set<Note> notes = new HashSet<>();
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private Set<Fee> fees = new HashSet<>();
+
+
+
     public Person(String name)
     {
         this.name = name;
     }
 
-    // Relationer 1:m
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private Set<Fee> fees = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Note> notes = new HashSet<>();
 
     // Bi-directional update
 
@@ -58,5 +63,6 @@ public class Person
             fee.setPerson(this);
         }
     }
+
 
 }

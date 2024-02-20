@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,9 +21,23 @@ public class Main {
             p1.addFee(f1);
             p1.addFee(f2);
 
+
+
             em.getTransaction().begin();
                 em.persist(p1);
             em.getTransaction().commit();
         }
+
+        DolphinDAO dolphinDAO = new DolphinDAO(emf);
+
+
+
+        /*
+        List<PersonDTO> allPersons = dolphinDAO.readAllPersonsDTO();
+
+        System.out.println(allPersons);
+
+         */
+
     }
 }
