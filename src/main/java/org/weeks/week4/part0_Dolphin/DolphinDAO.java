@@ -38,6 +38,17 @@ public class DolphinDAO {
         }
     }
 
+    public List<Note> getPersonNotes(int id){
+        try (var em = entityManagerFactory.createEntityManager()) {
+
+            var query = em.createQuery("SELECT p.notes FROM Person p JOIN p.notes n", Note.class);
+
+            // Managed and detached
+            return query.getResultList();// DB, managed, detached?
+
+        }
+    }
+
 
     public void updatePerson(int id, Person person){
 

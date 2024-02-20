@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,7 +18,7 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "note")
+
     private String note;
 
     @Column(columnDefinition = "TIMESTAMP")
@@ -27,11 +26,21 @@ public class Note {
 
     @ManyToOne
     @ToString.Exclude
-    private Person createdBy;
+    private Person person;
 
-    public Note(String note, LocalDateTime timeStamp, Person createdBy) {
+    public Note(String note) {
         this.note = note;
-        this.timeStamp = timeStamp;
-        this.createdBy = createdBy;
+
     }
+
+    @PrePersist
+    public void timeStamp () throws RuntimeException {
+
+        LocalDateTime localDateTime = java.time.LocalDateTime.now();
+
+        this.timeStamp = localDateTime;
+
+    }
+
+
 }

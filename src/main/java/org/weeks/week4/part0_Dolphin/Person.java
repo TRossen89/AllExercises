@@ -28,9 +28,7 @@ public class Person
 
 
     // Relationer 1:m
-
-
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<Note> notes = new HashSet<>();
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<Fee> fees = new HashSet<>();
@@ -63,6 +61,13 @@ public class Person
             fee.setPerson(this);
         }
     }
+    public void addNote(Note note){
+        this.notes.add(note);
+        if(note != null){
+            note.setPerson(this);
+        }
+    }
+
 
 
 }
