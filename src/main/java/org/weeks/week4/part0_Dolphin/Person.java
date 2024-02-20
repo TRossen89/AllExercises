@@ -36,6 +36,9 @@ public class Person
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<Fee> fees = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Note> notes = new HashSet<>();
+
     // Bi-directional update
 
     public void addPersonDetail(PersonDetail personDetail)
