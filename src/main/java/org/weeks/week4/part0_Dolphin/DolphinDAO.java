@@ -4,6 +4,7 @@ package org.weeks.week4.part0_Dolphin;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DolphinDAO {
 
@@ -45,6 +46,20 @@ public class DolphinDAO {
 
             // Managed and detached
             return query.getResultList();// DB, managed, detached?
+
+        }
+    }
+
+    public int getPersonTotalAmountPaid(int id){
+        try (var em = entityManagerFactory.createEntityManager()) {
+
+            var query = em.createQuery("SELECT p.fees FROM Person p JOIN p.fees n", Fee.class);
+
+            List<Fee> allFees = query.getResultList();
+
+            int totalAmount = allFees.stream().collect(Collectors.summingInt(Fee::getAmount));
+
+            return totalAmount;
 
         }
     }

@@ -58,6 +58,9 @@ public class Main {
         List<Note> notesOfPerson1 = dolphinDAO.getPersonNotes(1);
         System.out.println(notesOfPerson1);
 
+        // Getting total amount paid of person 1
+        System.out.println(dolphinDAO.getPersonTotalAmountPaid(1));
+
 
 
         /*
