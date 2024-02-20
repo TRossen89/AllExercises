@@ -40,27 +40,36 @@ public class Main {
         p1.addFee(f2);
 
 
+        Person admin1 = new Person("Karoline");
+        PersonDetail adminDetail1 = new PersonDetail("Samsøvej 31", 4300, "Holbæk", 28);
+        admin1.addPersonDetail(adminDetail1);
+
         // Adding not to person
-        Note note1 = new Note("This person is great");
-        Note note2 = new Note("This person is the first person");
+        Note note1 = new Note("This person is great", admin1 );
+        Note note2 = new Note("This person is the first person", admin1);
         p1.addNote(note1);
         p1.addNote(note2);
 
-        // Persisting person with note
+        // Persisting person with note and admin who created note
         DolphinDAO dolphinDAO = new DolphinDAO(emf);
+        dolphinDAO.createPerson(admin1);
         dolphinDAO.createPerson(p1);
 
+
         // Retrieving and printing out person
-        Person personPersisted = dolphinDAO.readPerson(1);
+        Person personPersisted = dolphinDAO.readPerson(2);
         System.out.println(personPersisted.getName());
 
-        // Retrieving notes of person with id 1
-        List<Note> notesOfPerson1 = dolphinDAO.getPersonNotes(1);
+        // Retrieving notes of person with id 2
+        List<Note> notesOfPerson1 = dolphinDAO.getPersonNotes(2);
         System.out.println(notesOfPerson1);
 
         // Getting total amount paid of person 1
-        System.out.println(dolphinDAO.getPersonTotalAmountPaid(1));
+        System.out.println(dolphinDAO.getPersonTotalAmountPaid(2));
 
+        // Getting all notes with name and age of person who wrote note
+        List<NoteDTO> allNotesOfPerson1 = dolphinDAO.readAllNoteWithNameAndAgeOfPersonDTO();
+        allNotesOfPerson1.forEach(System.out::println);
 
 
         /*

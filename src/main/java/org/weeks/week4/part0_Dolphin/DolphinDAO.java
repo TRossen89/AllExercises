@@ -39,10 +39,11 @@ public class DolphinDAO {
         }
     }
 
-    public List<Note> getPersonNotes(int id){
+    public List<Note> getPersonNotes(Integer id){
         try (var em = entityManagerFactory.createEntityManager()) {
 
-            var query = em.createQuery("SELECT p.notes FROM Person p JOIN p.notes n", Note.class);
+            var query = em.createQuery("SELECT p.notes FROM Person p JOIN p.notes n WHERE p.id = :id", Note.class)
+                    .setParameter("id", id.toString());
 
             // Managed and detached
             return query.getResultList();// DB, managed, detached?
@@ -99,6 +100,18 @@ public class DolphinDAO {
 
             // Removed
             em.getTransaction().commit();
+        }
+    }
+
+    public List<NoteDTO> readAllNoteWithNameAndAgeOfPersonDTO(){
+
+        try (var em = entityManagerFactory.createEntityManager()) {
+            // DB, managed
+            var query = em.createQuery("SELECT new org.weeks.week4.part0_Dolphin.NoteDTO(p.name, d.age, n.note)" +
+                    "FROM Person p JOIN p.personDetail d JOIN p.notes n", NoteDTO.class);
+
+            // Managed and detached
+            return query.getResultList();
         }
     }
 

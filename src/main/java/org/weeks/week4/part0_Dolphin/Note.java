@@ -26,10 +26,14 @@ public class Note {
 
     @ManyToOne
     @ToString.Exclude
+    private Person createdBy;
+    @ManyToOne
+    @ToString.Exclude
     private Person person;
 
-    public Note(String note) {
+    public Note(String note, Person createdBy) {
         this.note = note;
+        this.createdBy = createdBy;
 
     }
 
