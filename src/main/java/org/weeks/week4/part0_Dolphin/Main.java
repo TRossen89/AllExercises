@@ -2,7 +2,9 @@ package org.weeks.week4.part0_Dolphin;
 
 import jakarta.persistence.EntityManagerFactory;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -24,7 +26,9 @@ public class Main {
                 em.persist(p1);
             em.getTransaction().commit();
         }
+
          */
+
 
         Person p1 = new Person("Hanzi");
         Person p2 = new Person("Orla");
@@ -79,6 +83,17 @@ public class Main {
         List<NoteDTO> allNotesOfPerson1 = dolphinDAO.readAllNotesWithNameAndAgeOfPersonDTO();
         allNotesOfPerson1.forEach(System.out::println);
 
+
+
+        /*
+        Date date = new Date();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yy-MM-dd");
+
+
+        String dateOfEmployment = formatter.format(date).replaceAll("-", "");
+
+        System.out.println(dateOfEmployment);
 
         /*
         List<PersonDTO> allPersons = dolphinDAO.readAllPersonsDTO();
