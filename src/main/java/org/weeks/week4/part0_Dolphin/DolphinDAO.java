@@ -2,13 +2,17 @@ package org.weeks.week4.part0_Dolphin;
 
 
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NamedQuery;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.hibernate.sql.ast.Clause.FROM;
+
 public class DolphinDAO {
 
     EntityManagerFactory entityManagerFactory;
+
 
     public DolphinDAO(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
@@ -103,7 +107,7 @@ public class DolphinDAO {
         }
     }
 
-    public List<NoteDTO> readAllNoteWithNameAndAgeOfPersonDTO(){
+    public List<NoteDTO> readAllNotesWithNameAndAgeOfPersonDTO(){
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed

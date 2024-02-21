@@ -6,14 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Getter
 @Setter
+
 @NoArgsConstructor
 @ToString
+
 @Entity
+
 public class Person
 {
     @Id
@@ -22,7 +27,6 @@ public class Person
     private String name;
 
     // Relationer 1:1
-
     @OneToOne(mappedBy="person", cascade = CascadeType.ALL)
     private PersonDetail personDetail;
 
@@ -32,6 +36,7 @@ public class Person
     private Set<Note> notes = new HashSet<>();
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<Fee> fees = new HashSet<>();
+
 
 
 
