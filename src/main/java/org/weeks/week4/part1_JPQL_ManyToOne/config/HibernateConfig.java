@@ -10,6 +10,8 @@ import org.weeks.week4.part0_Dolphin.Fee;
 import org.weeks.week4.part0_Dolphin.Note;
 import org.weeks.week4.part0_Dolphin.Person;
 import org.weeks.week4.part0_Dolphin.PersonDetail;
+import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
+//import org.weeks.week4.part1_JPQL_ManyToOne.model.WasteTruck;
 
 import java.util.Properties;
 
@@ -80,10 +82,9 @@ public class HibernateConfig {
 
     private static void getAnnotationConfiguration(Configuration configuration) {
         // add annotated classes
-        configuration.addAnnotatedClass(Person.class);
-        configuration.addAnnotatedClass(PersonDetail.class);
-        configuration.addAnnotatedClass(Fee.class);
-        configuration.addAnnotatedClass(Note.class);
+        configuration.addAnnotatedClass(Driver.class);
+        //configuration.addAnnotatedClass(WasteTruck.class);
+
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name, boolean isTest) {
