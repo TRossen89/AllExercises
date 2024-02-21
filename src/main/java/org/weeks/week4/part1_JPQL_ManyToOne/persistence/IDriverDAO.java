@@ -16,10 +16,14 @@ public interface IDriverDAO {
     List<Driver> fetchAllDriversWithSalaryGreaterThan10000();
     double fetchHighestSalary();
 
-    /*
+
     List<String> fetchFirstNameOfAllDrivers();
+
     long calculateNumberOfDrivers();
+
+
     Driver fetchDriverWithHighestSalary();
 
-     */
+
+
 }

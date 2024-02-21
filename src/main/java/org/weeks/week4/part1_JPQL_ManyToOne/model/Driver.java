@@ -62,16 +62,8 @@ public class Driver {
 
         Integer randomNumber = random.nextInt(100, 200);
 
-        System.out.println("Formatted date: " + dateOfEmployment);
-        System.out.println("Name first letter: " + nameFirstLetter);
-        System.out.println("Surname first letter: " + surnameFirstLetter);
-        System.out.println("Surname last letter: " + surnameLastLetter);
-        System.out.println("Random number: " + randomNumber);
-
         this.id = dateOfEmployment + "-" + nameFirstLetter + surnameFirstLetter + "-"
                 + randomNumber + surnameLastLetter;
-
-        System.out.println("Id: " + this.id);
 
         boolean idValidated = validateDriverId(this.id);
 

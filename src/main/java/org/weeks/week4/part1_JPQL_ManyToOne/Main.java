@@ -7,6 +7,7 @@ import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
 import org.weeks.week4.part1_JPQL_ManyToOne.persistence.DriverDAOImpl;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Main {
 
@@ -25,6 +26,39 @@ public class Main {
         driverDAO.saveDriver(driver3);
 
         System.out.println(driverDAO.getDriverById(driver1.getId()));
+
+        // Getting drivers by year
+        System.out.println("-----------------------\nDrivers by year: \n");
+        List<Driver> driverListYear2024 = driverDAO.findAllDriversEmployedAtTheSameYear("2024");
+        driverListYear2024.forEach(driver -> System.out.println("Driver: " + driver.getName() +"\n" +
+                "Year: " + driver.getEmploymentDate()+"\n"));
+
+
+        // Getting drivers by salart greater than 1000
+        System.out.println("-----------------------\nDrivers with salary greater than 10000: \n");
+        List<Driver> driverListSalaryGreaterThan1000 = driverDAO.fetchAllDriversWithSalaryGreaterThan10000();
+        driverListSalaryGreaterThan1000.forEach(driver -> {
+            System.out.println("Driver: " + driver.getName() +"\n" + "Salary: " + driver.getSalary()+"\n");
+        });
+
+        // Getting highest salary
+        System.out.println("-----------------------\nHighest salary: \n");
+        Double higestSalary = driverDAO.fetchHighestSalary();
+        System.out.println(higestSalary);
+
+
+        // Getting all driver's first name
+        System.out.println("-----------------------\nFirst name of drivers: \n");
+        List<String> allDriversFirstname = driverDAO.fetchFirstNameOfAllDrivers();
+        allDriversFirstname.forEach(System.out::println);
+
+        // Counting drivers
+        System.out.println("-----------------------\nNumber of drivers: \n");
+        System.out.println(driverDAO.calculateNumberOfDrivers());
+
+        // Getting driver with highest salary
+        System.out.println("-----------------------\nDriver with highest salary: \n");
+        System.out.println(driverDAO.fetchDriverWithHighestSalary());
 
     }
 }

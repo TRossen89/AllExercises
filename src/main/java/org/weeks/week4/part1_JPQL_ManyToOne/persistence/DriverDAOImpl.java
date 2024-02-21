@@ -95,8 +95,8 @@ public class DriverDAOImpl implements IDriverDAO {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed
-            var query = em.createQuery("SELECT a FROM Driver a WHERE a.salary > ?", Driver.class)
-                    .setParameter(1, 1000);
+            var query = em.createQuery("SELECT a FROM Driver a WHERE a.salary > ?1", Driver.class)
+                    .setParameter(1, 10000);
 
             // Managed and detached
             return query.getResultList();
@@ -107,22 +107,56 @@ public class DriverDAOImpl implements IDriverDAO {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed
-            var query = em.createQuery("SELECT a.salary FROM Driver a WHERE a.salary = max()")
-                    .setParameter(1, 1000);
+            var query = em.createQuery("SELECT max(a.salary) FROM Driver a");
 
             // Managed and detached
             return Double.parseDouble(query.getSingleResult().toString());
         }
 
     }
+
+
+    public List<String> fetchFirstNameOfAllDrivers(){
+
+        try (var em = entityManagerFactory.createEntityManager()) {
+            // DB, managed
+            var query = em.createQuery("SELECT a.name FROM Driver a");
+
+            // Managed and detached
+            return query.getResultList();
+        }
+
+
+    };
+
+    public long calculateNumberOfDrivers(){
+
+        try (var em = entityManagerFactory.createEntityManager()) {
+            // DB, managed
+            var query = em.createQuery("SELECT COUNT (a) FROM Driver a ");
+
+            // Managed and detached
+            return (long) query.getSingleResult();
+        }
+
+    };
+
+
+    public Driver fetchDriverWithHighestSalary(){
+        try (var em = entityManagerFactory.createEntityManager()) {
+            // DB, managed
+            var query = em.createQuery("SELECT a FROM Driver a ORDER BY a.salary DESC", Driver.class);
+            query.setMaxResults(1);
+            List<Driver> resultList = query.getResultList();
+            // Managed and detached
+            return resultList.isEmpty() ? null : resultList.get(0);
+        }
+
+
+    };
+
+
 };
-/*
-    List<String> fetchFirstNameOfAllDrivers();
 
-    long calculateNumberOfDrivers();
-
-    Driver fetchDriverWithHighestSalary();
-
- */
 
 
