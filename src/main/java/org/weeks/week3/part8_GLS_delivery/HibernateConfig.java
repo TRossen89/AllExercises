@@ -1,4 +1,5 @@
-package org.weeks.week4.part1_JPQL_ManyToOne.config;
+package org.weeks.week3.part8_GLS_delivery;
+
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -6,35 +7,26 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.weeks.week4.part0_Dolphin.Fee;
-import org.weeks.week4.part0_Dolphin.Note;
-import org.weeks.week4.part0_Dolphin.Person;
-import org.weeks.week4.part0_Dolphin.PersonDetail;
-import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
-import org.weeks.week4.part1_JPQL_ManyToOne.model.WasteTruck;
-//import org.weeks.week4.part1_JPQL_ManyToOne.model.WasteTruck;
 
 import java.util.Properties;
-
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class HibernateConfig {
 
     private static EntityManagerFactory entityManagerFactory;
-    private static String dbName;
 
     private static EntityManagerFactory buildEntityFactoryConfig() {
         try {
             Configuration configuration = new Configuration();
 
             Properties props = new Properties();
-            String connctionURL = String.format("jdbc:postgresql://localhost:5432/%s?currentSchema=public", dbName);
-            props.put("hibernate.connection.url", connctionURL);
+
+            props.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/weekthree?currentSchema=public");
             props.put("hibernate.connection.username", "postgres");
             props.put("hibernate.connection.password", "postgres");
             props.put("hibernate.show_sql", "false"); // show sql in console
-            props.put("hibernate.format_sql", "false"); // format sql in console
-            props.put("hibernate.use_sql_comments", "false"); // show sql comments in console
+            props.put("hibernate.format_sql", "true"); // format sql in console
+            props.put("hibernate.use_sql_comments", "true"); // show sql comments in console
 
             props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); // dialect for postgresql
             props.put("hibernate.connection.driver_class", "org.postgresql.Driver"); // driver class for postgresql
@@ -43,25 +35,6 @@ public class HibernateConfig {
             props.put("hibernate.hbm2ddl.auto", "update"); // hibernate creates tables based on entities
 
 
-            return getEntityManagerFactory(configuration, props);
-        } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    private static EntityManagerFactory setupHibernateConfigurationForTesting() {
-        try {
-            Configuration configuration = new Configuration();
-            Properties props = new Properties();
-            props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-            props.put("hibernate.connection.driver_class", "org.testcontainers.jdbc.ContainerDatabaseDriver");
-            props.put("hibernate.connection.url", "jdbc:tc:postgresql:15.3-alpine3.18:///test-db");
-            props.put("hibernate.connection.username", "postgres");
-            props.put("hibernate.connection.password", "postgres");
-            props.put("hibernate.archive.autodetection", "class");
-            props.put("hibernate.show_sql", "true");
-            props.put("hibernate.hbm2ddl.auto", "create-drop");
             return getEntityManagerFactory(configuration, props);
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
@@ -83,14 +56,11 @@ public class HibernateConfig {
 
     private static void getAnnotationConfiguration(Configuration configuration) {
         // add annotated classes
-        configuration.addAnnotatedClass(Driver.class);
-        configuration.addAnnotatedClass(WasteTruck.class);
-
+        //configuration.addAnnotatedClass(Unicorn.class);
+        configuration.addAnnotatedClass(java.lang.Package.class);
     }
 
-    public static EntityManagerFactory getEntityManagerFactoryConfig(String name, boolean isTest) {
-        dbName = name;
-        if (isTest) return entityManagerFactory = setupHibernateConfigurationForTesting();
+    public static EntityManagerFactory getEntityManagerFactoryConfig() {
         if (entityManagerFactory == null) entityManagerFactory = buildEntityFactoryConfig();
         return entityManagerFactory;
     }

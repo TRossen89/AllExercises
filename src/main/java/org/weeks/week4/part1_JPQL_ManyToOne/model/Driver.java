@@ -30,11 +30,10 @@ public class Driver {
     @Column(precision = 10, scale = 2)
     private BigDecimal salary;
     private String surname;
-/*
-    @ManyToOne()
-    private WasteTruck wasteTruck;
 
- */
+    @ManyToOne()
+    private WasteTruck waste_truck;
+
 
     public Driver(String name, String surname, BigDecimal salary) {
         this.name = name;

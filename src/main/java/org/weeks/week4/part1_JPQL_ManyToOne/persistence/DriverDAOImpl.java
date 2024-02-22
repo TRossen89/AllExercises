@@ -22,6 +22,7 @@ public class DriverDAOImpl implements IDriverDAO {
 
     public void saveDriver(Driver driver) {
 
+
         try (var em = entityManagerFactory.createEntityManager()) {
 
             em.getTransaction().begin();
@@ -82,8 +83,8 @@ public class DriverDAOImpl implements IDriverDAO {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed
-            var query = em.createQuery("SELECT a FROM Driver a WHERE year (a.employmentDate) = :date", Driver.class)
-                    .setParameter("date", year);
+            var query = em.createQuery("SELECT a FROM Driver a WHERE year (a.employmentDate) = :year", Driver.class)
+                    .setParameter("year", year);
 
             // Managed and detached
             return query.getResultList();
