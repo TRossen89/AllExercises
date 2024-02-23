@@ -1,6 +1,8 @@
 package org.weeks.week4.part1_JPQL_ManyToOne.persistence;
 
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
 import org.weeks.week4.part1_JPQL_ManyToOne.model.WasteTruck;
 
@@ -19,7 +21,7 @@ public class WasteTruckDAOImpl {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             em.getTransaction().begin();
-            em.createNativeQuery("ALTER SEQUENCE waste_truck_id_seq RESTART WITH 7").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE waste_truck_id_seq RESTART WITH 8").executeUpdate();
             em.getTransaction().commit();
         }
     }
@@ -83,7 +85,6 @@ public class WasteTruckDAOImpl {
 
             Driver driverFromDB = em.find(Driver.class, driver.getId());
 
-            wasteTruck.addDriver(driver);
             driverFromDB.setWaste_truck(wasteTruck);
 
             em.merge(driverFromDB);
@@ -114,13 +115,11 @@ public class WasteTruckDAOImpl {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed
-            var query = em.createQuery("SELECT a FROM WasteTruck a WHERE a.is_available = true", WasteTruck.class);
+            Query query = em.createQuery("SELECT a FROM WasteTruck a WHERE a.is_available = true", WasteTruck.class);
 
             // Managed and detached
             return query.getResultList();
         }
 
     }
-
-    ;
 }

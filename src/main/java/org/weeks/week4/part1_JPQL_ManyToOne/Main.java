@@ -32,7 +32,10 @@ public class Main {
 
 
         WasteTruckDAOImpl wasteTruckDAO = new WasteTruckDAOImpl(emf);
+
+        //TODO Native query: Ctrl B
         wasteTruckDAO.setFirstIdInTable();
+
         wasteTruckDAO.saveWasteTruck(wasteTruck1);
         wasteTruckDAO.setWasteTruckAvailable(wasteTruck1,true);
 
@@ -48,15 +51,20 @@ public class Main {
 
         // Getting drivers by salart greater than 1000
         System.out.println("-----------------------\nDrivers with salary greater than 10000: \n");
+
+        //TODO TypedQuery: Ctrl B
         List<Driver> driverListSalaryGreaterThan1000 = driverDAO.fetchAllDriversWithSalaryGreaterThan10000();
+
         driverListSalaryGreaterThan1000.forEach(driver -> {
             System.out.println("Driver: " + driver.getName() +"\n" + "Salary: " + driver.getSalary()+"\n");
         });
 
         // Getting highest salary
         System.out.println("-----------------------\nHighest salary: \n");
-        Double higestSalary = driverDAO.fetchHighestSalary();
-        System.out.println(higestSalary);
+
+        //TODO Named query: Ctrl B
+        Double highestSalary = driverDAO.fetchHighestSalary();
+        System.out.println(highestSalary);
 
 
         // Getting all driver's first name
@@ -95,6 +103,10 @@ public class Main {
 
         allAvailableWasteTrucks.forEach(System.out::println);
 
+
+        // Deleting driver and wastetruck so
+        driverDAO.deleteDriver(driver1.getId());
+        wasteTruckDAO.deleteWasteTruck(wasteTruck1.getId());
 
 
 

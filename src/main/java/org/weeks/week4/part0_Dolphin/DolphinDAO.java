@@ -3,6 +3,7 @@ package org.weeks.week4.part0_Dolphin;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Query;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -111,7 +112,7 @@ public class DolphinDAO {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed
-            var query = em.createQuery("SELECT new org.weeks.week4.part0_Dolphin.NoteDTO(p.name, d.age, n.note)" +
+            Query query = em.createQuery("SELECT new org.weeks.week4.part0_Dolphin.NoteDTO(p.name, d.age, n.note)" +
                     "FROM Person p JOIN p.personDetail d JOIN p.notes n", NoteDTO.class);
 
             // Managed and detached

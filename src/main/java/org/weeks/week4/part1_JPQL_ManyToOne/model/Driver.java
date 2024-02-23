@@ -18,6 +18,7 @@ import org.weeks.week4.part1_JPQL_ManyToOne.config.HibernateConfig;
 @Entity
 @Table(name = "driver")
 @NoArgsConstructor
+@NamedQuery(name = "Driver.findDriverWithHighestSalary", query ="SELECT max(a.salary) FROM Driver a")
 public class Driver {
     @Id
     private String id;

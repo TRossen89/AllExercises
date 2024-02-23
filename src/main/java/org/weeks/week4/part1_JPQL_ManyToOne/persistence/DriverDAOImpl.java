@@ -1,6 +1,7 @@
 package org.weeks.week4.part1_JPQL_ManyToOne.persistence;
 
 
+import jakarta.persistence.TypedQuery;
 import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
 
 import java.math.BigDecimal;
@@ -96,7 +97,7 @@ public class DriverDAOImpl implements IDriverDAO {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed
-            var query = em.createQuery("SELECT a FROM Driver a WHERE a.salary > ?1", Driver.class)
+            TypedQuery<Driver> query = em.createQuery("SELECT a FROM Driver a WHERE a.salary > ?1", Driver.class)
                     .setParameter(1, 10000);
 
             // Managed and detached
@@ -108,7 +109,7 @@ public class DriverDAOImpl implements IDriverDAO {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed
-            var query = em.createQuery("SELECT max(a.salary) FROM Driver a");
+            var query = em.createNamedQuery("Driver.findDriverWithHighestSalary");
 
             // Managed and detached
             return Double.parseDouble(query.getSingleResult().toString());

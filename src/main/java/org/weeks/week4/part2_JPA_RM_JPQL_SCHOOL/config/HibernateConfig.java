@@ -1,4 +1,4 @@
-package org.weeks.week4.part1_JPQL_ManyToOne.config;
+package org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -6,17 +6,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import java.util.Properties;
-import org.weeks.week4.part0_Dolphin.Fee;
-import org.weeks.week4.part0_Dolphin.Note;
-import org.weeks.week4.part0_Dolphin.Person;
-import org.weeks.week4.part0_Dolphin.PersonDetail;
 import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
 import org.weeks.week4.part1_JPQL_ManyToOne.model.WasteTruck;
-//import org.weeks.week4.part1_JPQL_ManyToOne.model.WasteTruck;
 
-
-
+import java.util.Properties;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class HibernateConfig {
@@ -84,8 +77,8 @@ public class HibernateConfig {
 
     private static void getAnnotationConfiguration(Configuration configuration) {
         // add annotated classes
-        configuration.addAnnotatedClass(Driver.class);
-        configuration.addAnnotatedClass(WasteTruck.class);
+        //onfiguration.addAnnotatedClass(.class);
+        //configuration.addAnnotatedClass(WasteTruck.class);
 
     }
 
