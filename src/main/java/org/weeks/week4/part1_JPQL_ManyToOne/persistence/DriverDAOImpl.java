@@ -97,7 +97,7 @@ public class DriverDAOImpl implements IDriverDAO {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             // DB, managed
-            TypedQuery<Driver> query = em.createQuery("SELECT a FROM Driver a WHERE a.salary > ?1", Driver.class)
+            var query = em.createQuery("SELECT a FROM Driver a WHERE a.salary > ?1", Driver.class)
                     .setParameter(1, 10000);
 
             // Managed and detached

@@ -59,7 +59,8 @@ public class DolphinDAO {
     public int getPersonTotalAmountPaid(int id){
         try (var em = entityManagerFactory.createEntityManager()) {
 
-            var query = em.createQuery("SELECT p.fees FROM Person p JOIN p.fees n", Fee.class);
+            var query = em.createQuery("SELECT p.fees FROM Person p JOIN p.fees n WHERE p.id = :id", Fee.class)
+                    .setParameter("id", id);
 
             List<Fee> allFees = query.getResultList();
 

@@ -8,6 +8,9 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
 import org.weeks.week4.part1_JPQL_ManyToOne.model.WasteTruck;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Semester;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;
 
 import java.util.Properties;
 
@@ -77,8 +80,9 @@ public class HibernateConfig {
 
     private static void getAnnotationConfiguration(Configuration configuration) {
         // add annotated classes
-        //onfiguration.addAnnotatedClass(.class);
-        //configuration.addAnnotatedClass(WasteTruck.class);
+        configuration.addAnnotatedClass(Student.class);
+        configuration.addAnnotatedClass(Semester.class);
+        configuration.addAnnotatedClass(Teacher.class);
 
     }
 
