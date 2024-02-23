@@ -1,11 +1,14 @@
-package org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL;
+package org.weeks;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.DAO.StudentDAO;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.config.HibernateConfig;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Semester;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;
+
+import java.util.List;
 
 public class Populate {
 
@@ -29,6 +32,22 @@ public class Populate {
         Semester semester2 = new Semester("Educational Studies", "Situated Learning");
         Semester semester3 = new Semester("Psychology", "Critical Psychology");
 
+        semester1.addStudent(student1);
+        semester1.addStudent(student2);
+        semester1.addStudent(student3);
+
+        semester2.addStudent(student4);
+
+        semester3.addStudent(student5);
+
+        semester1.addTeacher(teacher2);
+        semester1.addTeacher(teacher3);
+        semester1.addTeacher(teacher5);
+
+        semester2.addTeacher(teacher4);
+
+        semester3.addTeacher(teacher1);
+
 
 
         try {
@@ -50,11 +69,13 @@ public class Populate {
             em.persist(semester2);
             em.persist(semester3);
 
+            System.out.println("Students, teachers and semesters persisted!");
 
             // populate the database with data
             em.getTransaction().commit();
         } finally {
             em.close();
         }
+
     }
 }

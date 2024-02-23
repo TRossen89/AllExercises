@@ -33,6 +33,7 @@ public class Main {
 
         WasteTruckDAOImpl wasteTruckDAO = new WasteTruckDAOImpl(emf);
 
+        //Setting start of id counting so that I can run the program again without changing in the DB
         //TODO Native query
         wasteTruckDAO.setFirstIdInTable();
 
@@ -104,12 +105,9 @@ public class Main {
         allAvailableWasteTrucks.forEach(System.out::println);
 
 
-        // Deleting driver and wastetruck so
+        // Deleting driver and wastetruck so that I can run the program again without changing in the DB
         driverDAO.deleteDriver(driver1.getId());
         wasteTruckDAO.deleteWasteTruck(wasteTruck1.getId());
-
-
-
 
     }
 }

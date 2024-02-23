@@ -6,8 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
-import org.weeks.week4.part1_JPQL_ManyToOne.model.WasteTruck;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Semester;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;

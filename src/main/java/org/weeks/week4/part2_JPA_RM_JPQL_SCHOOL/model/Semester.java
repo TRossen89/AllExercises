@@ -31,7 +31,7 @@ public class Semester {
     private Set<Student> students = new HashSet<>();
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "semester")
+    @ManyToMany
     private Set<Teacher> teachers = new HashSet<>();
 
 
@@ -49,8 +49,8 @@ public class Semester {
 
     public void addStudent(Student student){
         this.students.add(student);
-        /*if(!students.isEmpty()){
+        if(student!=null){
+            student.addSemester(this);
         }
-         */
     }
 }

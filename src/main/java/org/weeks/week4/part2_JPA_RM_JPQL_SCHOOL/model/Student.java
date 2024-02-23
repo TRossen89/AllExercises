@@ -26,10 +26,16 @@ public class Student {
     private String lastName;
 
     @ManyToOne
+    @JoinColumn(name = "semester_id")
+    @ToString.Exclude
     private Semester semester;
 
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public void addSemester(Semester semester){
+        this.semester = semester;
     }
 }
