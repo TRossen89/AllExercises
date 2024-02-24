@@ -4,7 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.DAO.StudentDAO;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.config.HibernateConfig;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Semester;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.StudentInfo;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;
 
 import java.util.List;
@@ -12,7 +14,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("week4", false);
-
 
         StudentDAO studentDAO = new StudentDAO(emf);
 
@@ -41,15 +42,28 @@ public class Main {
 
 
         // Finding teacher with most semesters
-        System.out.println("-----------------------\nTeacher with most semesters: \n");
 
         Teacher teacherWithMostSemesters = studentDAO.findTeacherWithMostSemesters();
+        System.out.println("-----------------------\nTeacher with most semesters: \n");
         System.out.println(teacherWithMostSemesters);
         System.out.println("Number of semesters: " + teacherWithMostSemesters.getSemesters().size());
 
 
+        // Finding semester with fewest students
+        System.out.println("-----------------------\nSemester with fewest students: \n");
+        Semester semesterWithFewestStudents = studentDAO.findSemesterWithFewestStudents();
+        System.out.println(semesterWithFewestStudents.getName());
+
+
+        // List with student's student info
+        List<StudentInfo> listOfStudentInfo = studentDAO.getAllStudentInfo();
+
+        System.out.println("-----------------------\nStudent info of all students: \n");
+        listOfStudentInfo.forEach(System.out::println);
+
+        System.out.println("-----------------------\nStudent info of one student: \n");
+        System.out.println(studentDAO.getAllStudentInfo(2));
 
     }
-
 
 }

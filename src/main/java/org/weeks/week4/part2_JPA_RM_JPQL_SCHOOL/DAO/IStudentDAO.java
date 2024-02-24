@@ -1,6 +1,8 @@
 package org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.DAO;
 
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Semester;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.StudentInfo;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;
 
 import java.util.List;
@@ -22,12 +24,11 @@ public interface IStudentDAO {
 
     // find the teacher who teaches the most semesters
     Teacher findTeacherWithMostSemesters();
-/*
+
     // find the semester that has the fewest students
     Semester findSemesterWithFewestStudents();
-/*
-    // find all students, encapsulated as StudentInfo
-    StudentInfo getAllStudentInfo(int id);
 
- */
+    // find all students, encapsulated as StudentInfo
+    List<StudentInfo> getAllStudentInfo();
+
 }

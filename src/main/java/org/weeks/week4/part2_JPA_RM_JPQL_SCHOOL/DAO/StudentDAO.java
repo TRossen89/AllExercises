@@ -1,8 +1,11 @@
 package org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.DAO;
 
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
+import org.weeks.week4.part0_Dolphin.NoteDTO;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Semester;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.StudentInfo;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;
 
 import java.util.ArrayList;
@@ -96,12 +99,52 @@ public class StudentDAO implements IStudentDAO{
             else {
                 return null;
             }
-
-            //return query.getResultList();
             //return listOfTeachers.isEmpty() ? null : listOfTeachers.get(0);
+        }
+    };
+
+    public Semester findSemesterWithFewestStudents(){
+
+        try (var em = entityManagerFactory.createEntityManager()){
+
+            var query = em.createQuery("SELECT a FROM Semester a JOIN a.students s GROUP BY a ORDER BY COUNT(s)",
+                    Semester.class);
+
+            query.setMaxResults(1);
+            List<Semester> listOfSemesters = query.getResultList();
+
+            return listOfSemesters.isEmpty() ? null : listOfSemesters.get(0);
         }
 
     };
+
+
+    public List<StudentInfo> getAllStudentInfo(){
+
+        try (var em = entityManagerFactory.createEntityManager()) {
+
+            var query = em.createQuery("SELECT new org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.StudentInfo" +
+                            "(concat(s.firstName, ' ',s.lastName), s.id, a.name, a.description) FROM Semester a JOIN a.students s"
+                    , StudentInfo.class);
+
+            return query.getResultList();
+
+        }
+    }
+
+    public StudentInfo getAllStudentInfo(int id){
+
+        try (var em = entityManagerFactory.createEntityManager()) {
+
+            var query = em.createQuery("SELECT new org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.StudentInfo" +
+                            "(concat(s.firstName, ' ',s.lastName), s.id, a.name, a.description) FROM Semester a " +
+                            "JOIN a.students s WHERE s.id = :id"
+                    , StudentInfo.class).setParameter("id", id);
+
+            return query.getSingleResult();
+
+        }
+    }
 
 
 }

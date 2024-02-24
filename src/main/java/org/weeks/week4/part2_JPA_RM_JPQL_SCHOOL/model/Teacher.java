@@ -24,6 +24,8 @@ public class Teacher {
     private String firstName;
     private String lastName;
 
+    // I've made the teacher-semester relation bidirectional so that I can get number of semesters from
+    // from the teacher object. I don't know if there is a better way than I've done it
     @ToString.Exclude
     @ManyToMany
     private Set<Semester> semesters = new HashSet<>();
