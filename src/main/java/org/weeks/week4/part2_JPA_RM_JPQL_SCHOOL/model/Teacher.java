@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -21,6 +24,10 @@ public class Teacher {
     private String firstName;
     private String lastName;
 
+    @ToString.Exclude
+    @ManyToMany
+    private Set<Semester> semesters = new HashSet<>();
+
     public Teacher(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,6 +38,14 @@ public class Teacher {
         this.lastName = lastName;
         this.id = id;
     }
+
+
+    public void addSemester(Semester semester){
+
+        semesters.add(semester);
+    }
+
+
 
 
 }

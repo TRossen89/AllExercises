@@ -19,7 +19,7 @@ public interface IStudentDAO {
 
     // find the total number of students that has a particular teacher
     long findTotalNumberOfStudentsByTeacher(Teacher teacher);
-/*
+
     // find the teacher who teaches the most semesters
     Teacher findTeacherWithMostSemesters();
 /*

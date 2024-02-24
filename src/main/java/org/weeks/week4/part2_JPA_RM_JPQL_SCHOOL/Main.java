@@ -36,11 +36,20 @@ public class Main {
         // Finding students by teacher
         Teacher teacher1 = new Teacher("Jerry", "Fodor", 1);
 
-        //List<Student> listOfStudentWithTeacher1 = studentDAO.findTotalNumberOfStudentsByTeacher(teacher1);
-        //listOfStudentWithTeacher1.forEach(System.out::println);
-
         System.out.println("-----------------------\nNumber of students having teacher1 (Klaus Holzkamp): \n");
         System.out.println(studentDAO.findTotalNumberOfStudentsByTeacher(teacher1));
 
+
+        // Finding teacher with most semesters
+        System.out.println("-----------------------\nTeacher with most semesters: \n");
+
+        Teacher teacherWithMostSemesters = studentDAO.findTeacherWithMostSemesters();
+        System.out.println(teacherWithMostSemesters);
+        System.out.println("Number of semesters: " + teacherWithMostSemesters.getSemesters().size());
+
+
+
     }
+
+
 }

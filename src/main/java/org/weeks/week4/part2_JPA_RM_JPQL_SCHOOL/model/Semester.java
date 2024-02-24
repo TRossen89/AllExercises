@@ -42,9 +42,10 @@ public class Semester {
 
     public void addTeacher(Teacher teacher){
         this.teachers.add(teacher);
-        /*if(!teachers.isEmpty()){
+        if(teacher!=null){
+            teacher.addSemester(this);
         }
-         */
+
     }
 
     public void addStudent(Student student){
