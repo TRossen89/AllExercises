@@ -7,3 +7,6 @@ endnu. Det ved jeg ikke om jeg når.
 
 Jeg har tænkt mig at lave videre på opgaverne i weekenden, da jeg går ud fra du ikke ser på det jeg har lavet 
 i løbet af weekenden. Jeg laver en status her i readme-filen hver gang jeg har lavet noget mere.  
+
+
+24.02.2024: Alle metoder fra DAO-interfacet er implementeret
