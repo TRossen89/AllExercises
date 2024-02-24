@@ -1,6 +1,7 @@
 package org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.DAO;
 
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;
 
 import java.util.List;
 
@@ -16,8 +17,6 @@ public interface IStudentDAO {
     long findTotalNumberOfStudentsBySemester(String semesterName);
 
 
-
-    /*
     // find the total number of students that has a particular teacher
     long findTotalNumberOfStudentsByTeacher(Teacher teacher);
 /*

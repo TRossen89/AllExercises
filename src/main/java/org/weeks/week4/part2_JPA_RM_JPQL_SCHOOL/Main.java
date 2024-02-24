@@ -5,13 +5,14 @@ import jakarta.persistence.EntityManagerFactory;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.DAO.StudentDAO;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.config.HibernateConfig;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("week4", false);
-        EntityManager em = emf.createEntityManager();
+
 
         StudentDAO studentDAO = new StudentDAO(emf);
 
@@ -31,6 +32,15 @@ public class Main {
         System.out.println("-----------------------\nNumber of students in Philosophy: \n");
         System.out.println(numberOfStudentsInPhilosophy);
 
+
+        // Finding students by teacher
+        Teacher teacher1 = new Teacher("Jerry", "Fodor", 1);
+
+        //List<Student> listOfStudentWithTeacher1 = studentDAO.findTotalNumberOfStudentsByTeacher(teacher1);
+        //listOfStudentWithTeacher1.forEach(System.out::println);
+
+        System.out.println("-----------------------\nNumber of students having teacher1 (Klaus Holzkamp): \n");
+        System.out.println(studentDAO.findTotalNumberOfStudentsByTeacher(teacher1));
 
     }
 }

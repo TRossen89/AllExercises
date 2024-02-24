@@ -18,13 +18,18 @@ public class Teacher {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-
     private String firstName;
     private String lastName;
 
     public Teacher(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Teacher(String firstName, String lastName, Integer id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
     }
 
 

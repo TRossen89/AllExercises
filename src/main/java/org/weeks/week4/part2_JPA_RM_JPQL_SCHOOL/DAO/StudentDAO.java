@@ -2,6 +2,7 @@ package org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.DAO;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Student;
+import org.weeks.week4.part2_JPA_RM_JPQL_SCHOOL.model.Teacher;
 
 import java.util.List;
 
@@ -47,7 +48,21 @@ public class StudentDAO implements IStudentDAO{
 
             return (long) query.getSingleResult();
         }
-    };
+    }
+
+
+    public long findTotalNumberOfStudentsByTeacher(Teacher teacher){
+
+        try (var em = entityManagerFactory.createEntityManager()){
+
+            var query = em.createQuery("SELECT COUNT(s) FROM Semester a JOIN a.students s " +
+                    "JOIN a.teachers t WHERE t.id = ?1").setParameter(1, teacher.getId());
+
+            //return query.getResultList();
+            return (long) query.getSingleResult();
+        }
+
+    }
 
 
 

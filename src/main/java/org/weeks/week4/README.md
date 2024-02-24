@@ -1,7 +1,7 @@
 ## Status:
 
 Jeg har lavet part 0 og part 1 (men har kun testet én metode med junit) og er i gang med part 2. 
-Jeg har nået ca. halvdelen af part 2. Er i gang med at implementerer DAO - interfacet med alle
+Jeg har nået ca. halvdelen af part 2. Er i gang med at implementerer DAO-interfacet med alle
 metoderne med JPQL queries. Har implementeret 3 metoder indtil videre. Har ikke lavet nogle junit tests
 endnu. Det ved jeg ikke om jeg når. 
 

@@ -36,13 +36,16 @@ public class Populate {
         semester1.addStudent(student2);
         semester1.addStudent(student3);
 
+
         semester2.addStudent(student4);
 
         semester3.addStudent(student5);
 
+        semester1.addTeacher(teacher1);
         semester1.addTeacher(teacher2);
         semester1.addTeacher(teacher3);
         semester1.addTeacher(teacher5);
+
 
         semester2.addTeacher(teacher4);
 
