@@ -16,7 +16,6 @@ public class DolphinDAOTest {
     DolphinDAO dolphinDAO;
 
 
-
     @BeforeAll
     void beforeAll() {
         emfTest = HibernateConfig.getEntityManagerFactoryConfig("week4", true);

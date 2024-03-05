@@ -1,0 +1,55 @@
+1) I asked the store for a specific item, and they found it for me. Which HTTP status code does this refer to?
+
+ANSWER: 200
+
+
+
+
+-------------------------------------------------------------------
+2) I went to the store, but the item I wanted is out of stock. Which HTTP status code does this refer to?
+
+ANSWER: 404
+
+
+
+-------------------------------------------------------------------
+3) I asked for a discount, but the store manager refused. Which HTTP status code does this refer to?
+
+ANSWER: Could be 401 or 403 I would say. Maybe more 403 than 401.
+
+
+
+-------------------------------------------------------------------
+4) I returned a defective product to the store, and they accepted the return. Which HTTP status code does this refer to?
+
+ANSWER: Not sure but maybe 204. You return something and expect nothing back? If you expect something back it should be
+200. If you "create" something by returning a product it could also be 201.
+
+
+
+-------------------------------------------------------------------
+5) I asked the store for a specific product, but they redirected me to another store.
+Which HTTP status code does this refer to?
+
+ANSWER: One of the 300's. 300, 301 or 304 for example.
+
+
+
+-------------------------------------------------------------------
+6) I successfully placed an order for a custom-made cake at the bakery, and they informed me that it would be ready soon.
+Which HTTP status code does this refer to?
+
+ANSWER: I don't think there is a status code that fits this. But 102 (request has been accepted, but it will take
+a significant amount of time to be completed) and 202 (Request has been accepted for processing but the processing has
+not been completed yet) fits more or less.
+
+
+
+
+-------------------------------------------------------------------
+7) I went to a store to buy a particular brand of sneakers, but they informed me that they've moved to a new location.
+Which HTTP status code does this refer to?
+
+ANSWER: I guess 301
+
+-------------------------------------------------------------------

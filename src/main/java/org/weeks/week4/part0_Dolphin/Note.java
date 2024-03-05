@@ -40,9 +40,7 @@ public class Note {
 
     @PrePersist
     public void timeStamp () throws RuntimeException {
-
         LocalDateTime localDateTime = java.time.LocalDateTime.now();
-
         this.timeStamp = localDateTime;
 
     }
