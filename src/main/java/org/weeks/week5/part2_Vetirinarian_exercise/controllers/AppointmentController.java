@@ -1,17 +1,13 @@
-package org.weeks.week5.part2_Vetirinarian_exercise.handlers;
+package org.weeks.week5.part2_Vetirinarian_exercise.controllers;
 
 
-import org.weeks.week5.part1_Dog_exercise.dtos.DogDTO;
-import org.weeks.week5.part2_Vetirinarian_exercise.dtos.AppointmentDTO;
 import io.javalin.http.Context;
 import org.weeks.week5.part2_Vetirinarian_exercise.model.Appointment;
-import org.weeks.week5.part2_Vetirinarian_exercise.model.Patient;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class AppointmentHandler {
+public class AppointmentController {
 
     private static final Map<Integer, Appointment> appointmentMap = new HashMap<>();
 

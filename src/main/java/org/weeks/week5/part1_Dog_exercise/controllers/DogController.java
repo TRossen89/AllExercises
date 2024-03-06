@@ -11,7 +11,7 @@ public class DogController {
 
     private static final Map<Integer, DogDTO> dogMap = new HashMap<>();
     private static int nextId = 1;
-    private static final Gson gson = new Gson();
+    //private static final Gson gson = new Gson();
 
     public static void addDogsToMap(){
         DogDTO dogDTO1 = new DogDTO(1, "Labrador", "Something", "female", 8);
