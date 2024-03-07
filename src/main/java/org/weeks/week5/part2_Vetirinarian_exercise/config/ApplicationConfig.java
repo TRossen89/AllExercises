@@ -50,7 +50,13 @@ public class ApplicationConfig {
 
         app.error(404, ctx -> {
             String message = ctx.attribute("message");
-            message = "{\"Message\": \"" + message + "\"}";
+            message = "{\"404\": \"" + message + "\"}";
+            ctx.json(message);
+        });
+
+        app.error(500, ctx -> {
+            String message = ctx.attribute("message");
+            message = "{\"500\": \"" + message + "\"}";
             ctx.json(message);
         });
 

@@ -5,7 +5,9 @@ import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import org.weeks.week5.part2_Vetirinarian_exercise.model.Patient;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PatientController implements IController {
@@ -31,7 +33,7 @@ public class PatientController implements IController {
     @Override
     public Handler getAll() {
         return ctx -> {
-            ctx.status(HttpStatus.OK).json(patientMap.values());
+            ctx.status(200).json(patientMap.values());
         };
     }
 
@@ -48,23 +50,32 @@ public class PatientController implements IController {
                 //
             }};
     }
-    public static void getPatientDetailsById(Context ctx) {
+    public static Patient getPatientFromMapWithId(int id){
 
-
-
+        return patientMap.get(id);
     }
 
-    public static void getAllPatients(Context ctx) {
-        ctx.json(patientMap.values());
-    }
 
     public static void addPatients() {
 
-        Patient patient1 = new Patient( "Tobias", 111);
-        Patient patient2 = new Patient("Jonas", 222);
-        Patient patient3 = new Patient( "Lykke", 333);
-        Patient patient4 = new Patient( "Finn", 444);
-        Patient patient5 = new Patient( "Nana", 555);
+        List<String> deceases1 = new ArrayList<>();
+        List<String> deceases2 = new ArrayList<>();
+        List<String> deceases3 = new ArrayList<>();
+        List<String> deceases4 = new ArrayList<>();
+        List<String> deceases5 = new ArrayList<>();
+
+        deceases1.add("infection");
+        deceases2.add("virus");
+        deceases3.add("broken body");
+        deceases4.add("feather loss");
+        deceases5.add("broken wing");
+        deceases5.add("cough");
+
+        Patient patient1 = new Patient( "Tobias", 111, "dog", deceases1);
+        Patient patient2 = new Patient("Jonas", 222, "cat", deceases2);
+        Patient patient3 = new Patient( "Lykke", 333, "snake", deceases3);
+        Patient patient4 = new Patient( "Finn", 444, "parrot", deceases4);
+        Patient patient5 = new Patient( "Nana", 555, "bat", deceases5);
 
         patientMap.put(patient1.getId(), patient1);
         patientMap.put(patient2.getId(), patient2);

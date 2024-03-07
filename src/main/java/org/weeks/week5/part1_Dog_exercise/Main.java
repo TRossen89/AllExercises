@@ -7,29 +7,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-            Javalin app = Javalin.create(config -> config.routing.contextPath = "/api/dogs");
+        Javalin app = Javalin.create(config -> config.routing.contextPath = "/api/dogs");
 
-            DogController.addDogsToMap();
+        DogController.addDogsToMap();
 
         app.routes(() -> {
-                app.get("", DogController::getAllDogs);
-                app.get("/{id}", DogController::getDogById);
-                app.post("", DogController::createDog);
-                app.put("/{id}", DogController::updateDog);
-                app.delete("/{id}", DogController::deleteDog);
-            });
-
-/*
-            app.get("api/dogs", DogController::getAllDogs);
-            app.get("api/dogs/{id}", DogController::getDogById);
-
-            app.post("api/dogs/{id}", DogController::createDog);
+            app.get("", DogController::getAllDogs);
+            app.get("/{id}", DogController::getDogById);
+            app.post("", DogController::createDog);
+            app.put("/{id}", DogController::updateDog);
+            app.delete("/{id}", DogController::deleteDog);
+            app.post("/{id}", DogController::createDog);
             app.put("api/dogs/{id}", DogController::updateDog);
             app.delete("api/dogs/{id}", DogController::deleteDog);
+        });
 
- */
-
-            app.start(7007);
-        }
+        app.start(7007);
     }
+}
 

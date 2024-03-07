@@ -1,0 +1,29 @@
+
+
+
+###
+GET http://localhost:7007/api/vet/patients
+
+
+###
+GET http://localhost:7007/api/vet/patients/4
+
+###
+GET http://localhost:7007/api/vet/patients/10
+
+###
+GET http://localhost:7007/api/vet/appointments/upcoming
+
+###
+GET http://localhost:7007/api/vet/appointments/2
+
+###
+GET http://localhost:7007/api/vet/
+
+
+###
+GET http://localhost:7007/api/dogs
+
+###
+POST http://localhost:7007/api/dogs/3
+

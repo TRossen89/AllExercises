@@ -9,9 +9,8 @@ import java.util.Map;
 
 public class DogController {
 
-    private static final Map<Integer, DogDTO> dogMap = new HashMap<>();
-    private static int nextId = 1;
-    //private static final Gson gson = new Gson();
+    private static Map<Integer, DogDTO> dogMap = new HashMap<>();
+
 
     public static void addDogsToMap(){
         DogDTO dogDTO1 = new DogDTO(1, "Labrador", "Something", "female", 8);
@@ -36,9 +35,9 @@ public class DogController {
 
     public static void createDog(Context ctx) {
         DogDTO newDog = ctx.bodyAsClass(DogDTO.class);
-        newDog.setId(nextId++);
+        //newDog.setId(nextId++);
         dogMap.put(newDog.getId(), newDog);
-        ctx.status(201).json(newDog);
+        //ctx.status(201).json(newDog);
     }
 
     public static void updateDog(Context ctx) {
