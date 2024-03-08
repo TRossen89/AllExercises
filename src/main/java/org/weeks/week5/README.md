@@ -7,4 +7,4 @@ GET metode hvor man kan hente alle hoteller i databasen (dog uden at få informa
 hotellerne).
 
 I mandags var der også en part1_Status_Code hvor vi skulle svare på nogle spørgsmål om de forskellige statuskoder. 
-Derfor er der også en package med en .txt-fil hvor jeg har skrevet mine svar. 
+Derfor er der også en package med en .txt-fil hvor jeg har skrevet mine svar.
