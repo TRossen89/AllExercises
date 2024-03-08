@@ -1,4 +1,4 @@
-package org.weeks.week5.part2_Vetirinarian_exercise.model;
+package org.weeks.week5.part2_Vetirinarian_exercise.dtos;
 
 
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 //@AllArgsConstructor
 @ToString
-public class Patient {
+public class PatientDTO {
 
     private static int idCounter = 0;
 
@@ -26,7 +26,7 @@ public class Patient {
 
 
 
-    public Patient(String nameOfOwner, int phoneNumberOfOwner, String animal, List<String> deceases) {
+    public PatientDTO(String nameOfOwner, int phoneNumberOfOwner, String animal, List<String> deceases) {
         this.nameOfOwner = nameOfOwner;
         this.phoneNumberOfOwner = phoneNumberOfOwner;
         this.animal = animal;

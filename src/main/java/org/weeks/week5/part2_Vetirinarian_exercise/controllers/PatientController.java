@@ -1,9 +1,7 @@
 package org.weeks.week5.part2_Vetirinarian_exercise.controllers;
 
-import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import io.javalin.http.HttpStatus;
-import org.weeks.week5.part2_Vetirinarian_exercise.model.Patient;
+import org.weeks.week5.part2_Vetirinarian_exercise.dtos.PatientDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +10,7 @@ import java.util.Map;
 
 public class PatientController implements IController {
 
-    private static final Map<Integer, Patient> patientMap = new HashMap<>();
+    private static final Map<Integer, PatientDTO> patientMap = new HashMap<>();
 
 
 
@@ -41,16 +39,16 @@ public class PatientController implements IController {
     public Handler getById(){
         return ctx -> {
             int id = Integer.parseInt(ctx.pathParam("id"));
-            Patient patient = patientMap.get(id);
-            if (patient != null) {
-                ctx.json(patient);
+            PatientDTO patientDTO = patientMap.get(id);
+            if (patientDTO != null) {
+                ctx.json(patientDTO);
             } else {
                 ctx.status(404);
             ctx.attribute("message", "No patient with id: "+id);
                 //
             }};
     }
-    public static Patient getPatientFromMapWithId(int id){
+    public static PatientDTO getPatientFromMapWithId(int id){
 
         return patientMap.get(id);
     }
@@ -71,17 +69,17 @@ public class PatientController implements IController {
         deceases5.add("broken wing");
         deceases5.add("cough");
 
-        Patient patient1 = new Patient( "Tobias", 111, "dog", deceases1);
-        Patient patient2 = new Patient("Jonas", 222, "cat", deceases2);
-        Patient patient3 = new Patient( "Lykke", 333, "snake", deceases3);
-        Patient patient4 = new Patient( "Finn", 444, "parrot", deceases4);
-        Patient patient5 = new Patient( "Nana", 555, "bat", deceases5);
+        PatientDTO patientDTO1 = new PatientDTO( "Tobias", 111, "dog", deceases1);
+        PatientDTO patientDTO2 = new PatientDTO("Jonas", 222, "cat", deceases2);
+        PatientDTO patientDTO3 = new PatientDTO( "Lykke", 333, "snake", deceases3);
+        PatientDTO patientDTO4 = new PatientDTO( "Finn", 444, "parrot", deceases4);
+        PatientDTO patientDTO5 = new PatientDTO( "Nana", 555, "bat", deceases5);
 
-        patientMap.put(patient1.getId(), patient1);
-        patientMap.put(patient2.getId(), patient2);
-        patientMap.put(patient3.getId(), patient3);
-        patientMap.put(patient4.getId(), patient4);
-        patientMap.put(patient5.getId(), patient5);
+        patientMap.put(patientDTO1.getId(), patientDTO1);
+        patientMap.put(patientDTO2.getId(), patientDTO2);
+        patientMap.put(patientDTO3.getId(), patientDTO3);
+        patientMap.put(patientDTO4.getId(), patientDTO4);
+        patientMap.put(patientDTO5.getId(), patientDTO5);
 
         patientMap.forEach((key, value) -> System.out.println("Key: " + key + "\nValue: " + value));
 
