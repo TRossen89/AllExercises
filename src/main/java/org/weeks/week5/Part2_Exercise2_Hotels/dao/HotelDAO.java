@@ -17,7 +17,9 @@ public class HotelDAO extends DAO<Hotel> {
     public List<Hotel> getAll(){
 
         try(var em = emf.createEntityManager()){
-            var query = em.createQuery("SELECT a FROM Hotel a JOIN a.rooms", Hotel.class);
+            var query = em.createQuery("SELECT a FROM Hotel a", Hotel.class);
+
+            //query.getResultList().forEach(System.out::println);
 
             return query.getResultList();
         }

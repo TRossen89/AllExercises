@@ -9,7 +9,9 @@ import lombok.ToString;
 import org.hibernate.annotations.Generated;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,7 +31,7 @@ public class Hotel {
 
     @OneToMany(mappedBy = "hotel", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @ToString.Exclude
-    private List<Room> rooms = new ArrayList<>();
+    private Set<Room> rooms = new HashSet<>();
 
     public Hotel(String hotelName, String address) {
         this.hotelName = hotelName;

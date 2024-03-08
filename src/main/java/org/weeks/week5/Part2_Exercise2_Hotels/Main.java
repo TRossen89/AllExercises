@@ -1,20 +1,29 @@
 package org.weeks.week5.Part2_Exercise2_Hotels;
 
+import io.javalin.apibuilder.EndpointGroup;
 import jakarta.persistence.EntityManagerFactory;
+import org.weeks.week5.Part2_Exercise2_Hotels.config.ApiConfig;
 import org.weeks.week5.Part2_Exercise2_Hotels.config.HibernateConfig;
+import org.weeks.week5.Part2_Exercise2_Hotels.controllers.HotelController;
 import org.weeks.week5.Part2_Exercise2_Hotels.dao.HotelDAO;
 import org.weeks.week5.Part2_Exercise2_Hotels.dao.IDAO;
 import org.weeks.week5.Part2_Exercise2_Hotels.dao.RoomDAO;
 import org.weeks.week5.Part2_Exercise2_Hotels.model.Hotel;
 import org.weeks.week5.Part2_Exercise2_Hotels.model.Room;
+import org.weeks.week5.part2_Vetirinarian_exercise.controllers.PatientController;
 
 import java.util.List;
 
+import static io.javalin.apibuilder.ApiBuilder.*;
+import static io.javalin.apibuilder.ApiBuilder.put;
+
 public class Main {
+
+    private static EntityManagerFactory emf;
 
     public static void main(String[] args) {
 
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
+        emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
 
 
         IDAO hotelDAO = new HotelDAO(emf);
@@ -41,6 +50,8 @@ public class Main {
         List<Hotel> allHotels = hotelDAO.getAll();
         allHotels.forEach(System.out::println);
 
+        /*
+
         System.out.println("\n------------HOTEL 1------------");
         System.out.println(hotelDAO.getById(1));
 
@@ -56,21 +67,24 @@ public class Main {
 
         allHotelsAfterDelete.forEach(System.out::println);
 
+ */
 
-
-
-
-
-/*
 
         ApiConfig
                 .getInstance()
                 .initiateServer()
                 .errorHandling()
                 .startServer(7007)
-                .setRoutes(patients())
-                .setRoutes(appointments());
+                .setRoutes(hotelsAndRooms());
 
- */
+
+    }
+
+    private static EndpointGroup hotelsAndRooms() {
+        HotelController hotelController = new HotelController(emf);
+        return () -> {
+            get("/", hotelController.getAll());
+
+        };
     }
 }
