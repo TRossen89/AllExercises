@@ -27,7 +27,7 @@ public class Hotel {
     private String address;
 
 
-    @OneToMany(mappedBy = "hotel", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "hotel", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @ToString.Exclude
     private List<Room> rooms = new ArrayList<>();
 

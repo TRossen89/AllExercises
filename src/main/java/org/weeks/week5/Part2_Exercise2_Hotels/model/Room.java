@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 
 public class Room {
     @Id
@@ -18,6 +20,7 @@ public class Room {
     private int number;
 
     private double price;
+
     @ManyToOne
     private Hotel hotel;
 
@@ -25,7 +28,6 @@ public class Room {
         this.number = number;
         this.price = price;
     }
-
 
 }
 
