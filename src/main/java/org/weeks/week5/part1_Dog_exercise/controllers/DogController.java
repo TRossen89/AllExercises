@@ -37,10 +37,11 @@ public class DogController {
     public void createDog(Context ctx, Map<Integer, DogDTO> dogMap) {
             DogDTO newDog = ctx.bodyAsClass(DogDTO.class);
             dogMap.put(newDog.getId(), newDog);
+            ctx.status(200).json("Dog created");
         }
 
-/*
-    public static void updateDog(Context ctx) {
+
+    public void updateDog(Context ctx, Map<Integer, DogDTO> dogMap) {
         int id = Integer.parseInt(ctx.pathParam("id"));
         DogDTO updatedDog = ctx.bodyAsClass(DogDTO.class);
         if (dogMap.containsKey(id)) {
@@ -52,7 +53,7 @@ public class DogController {
         }
     }
 
-    public static void deleteDog(Context ctx) {
+    public void deleteDog(Context ctx, Map<Integer, DogDTO> dogMap) {
         int id = Integer.parseInt(ctx.pathParam("id"));
         if (dogMap.containsKey(id)) {
             DogDTO deletedDog = dogMap.remove(id);
@@ -62,5 +63,4 @@ public class DogController {
         }
     }
 
- */
 }

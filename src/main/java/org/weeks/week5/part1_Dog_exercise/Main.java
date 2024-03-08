@@ -7,6 +7,8 @@ import org.weeks.week5.part1_Dog_exercise.dtos.DogDTO;
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.javalin.apibuilder.ApiBuilder.path;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -27,14 +29,19 @@ public class Main {
         //DogController.addDogsToMap();
 
         DogController dogController = new DogController();
-        app.routes(() -> {
-            app.get("", ctx -> dogController.getAllDogs(ctx, dogMap));
-            app.get("/{id}", ctx -> dogController.getDogById(ctx, dogMap));
-            app.post("/create", ctx -> dogController.createDog(ctx, dogMap));
 
+        app.routes(() -> {
+            path("/", () -> {
+                app.get("/", ctx -> dogController.getAllDogs(ctx, dogMap));
+                app.post("/create", ctx -> dogController.createDog(ctx, dogMap));
+                app.get("/{id}", ctx -> dogController.getDogById(ctx, dogMap));
+                app.delete("/{id}", ctx -> dogController.deleteDog(ctx, dogMap));
+                app.put("/{id}", ctx -> dogController.updateDog(ctx, dogMap));
+
+            });
         });
 
         app.start(7007);
-    }
+}
 }
 

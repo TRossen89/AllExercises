@@ -31,11 +31,27 @@ GET http://localhost:7007/api/vet/
 GET http://localhost:7007/api/dogs
 
 ###
+DELETE http://localhost:7007/api/dogs/2
+
+###
+PUT http://localhost:7007/api/dogs/3
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "Enzo",
+  "breed": "German Sherpherd",
+  "gender": "male",
+  "age": 6
+}
+
+
+###
 POST http://localhost:7007/api/dogs/create
 Content-Type: application/json
 
 {
-  "id": 8,
+  "id": 3,
   "name": "Som",
   "breed": "tre",
   "gender": "female",
