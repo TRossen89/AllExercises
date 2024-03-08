@@ -107,7 +107,7 @@ public class Main {
 
         // Deleting driver and wastetruck so that I can run the program again without changing in the DB
         driverDAO.deleteDriver(driver1.getId());
-        wasteTruckDAO.deleteWasteTruck(wasteTruck1.getId());
+        wasteTruckDAO.deleteWasteTruck(wasteTruck1);
 
     }
 }

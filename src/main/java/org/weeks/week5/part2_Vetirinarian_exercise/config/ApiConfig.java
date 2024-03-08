@@ -6,26 +6,26 @@ import io.javalin.apibuilder.EndpointGroup;
 
 import static io.javalin.apibuilder.ApiBuilder.path;
 
-public class ApplicationConfig {
+public class ApiConfig {
 
 
     private ObjectMapper objectMapper = new ObjectMapper();
-    private static ApplicationConfig instance;
+    private static ApiConfig instance;
     private static Javalin app;
 
-    private ApplicationConfig() {
+    private ApiConfig() {
 
     }
 
-    public static ApplicationConfig getInstance() {
+    public static ApiConfig getInstance() {
         if (instance == null) {
-            instance = new ApplicationConfig();
+            instance = new ApiConfig();
         }
         return instance;
     }
 
 
-    public ApplicationConfig initiateServer() {
+    public ApiConfig initiateServer() {
 
         app = Javalin.create(config -> {
             config.http.defaultContentType = "application/json";
@@ -34,19 +34,19 @@ public class ApplicationConfig {
         return instance;
     }
 
-    public ApplicationConfig setRoutes(EndpointGroup routes) {
+    public ApiConfig setRoutes(EndpointGroup routes) {
         app.routes(() -> {
             path("/", routes);
         });
         return instance;
     }
 
-    public ApplicationConfig startServer(int port){
+    public ApiConfig startServer(int port){
         app.start(port);
         return instance;
     }
 
-    public ApplicationConfig errorHandling(){
+    public ApiConfig errorHandling(){
 
         app.error(404, ctx -> {
             String message = ctx.attribute("message");

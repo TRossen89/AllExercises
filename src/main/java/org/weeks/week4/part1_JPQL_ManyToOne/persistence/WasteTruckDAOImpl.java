@@ -61,12 +61,12 @@ public class WasteTruckDAOImpl {
         }
     }
 
-    public void deleteWasteTruck(int id) {
+    public void deleteWasteTruck(WasteTruck wastetruck) {
 
         try (var em = entityManagerFactory.createEntityManager()) {
             em.getTransaction().begin();
             // DB and then managed
-            var wastetruck = em.find(WasteTruck.class, id);
+            //var wastetruck = em.find(WasteTruck.class, id);
 
             // Managed
             em.remove(wastetruck);
