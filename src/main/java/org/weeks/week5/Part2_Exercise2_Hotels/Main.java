@@ -10,7 +10,6 @@ import org.weeks.week5.Part2_Exercise2_Hotels.dao.IDAO;
 import org.weeks.week5.Part2_Exercise2_Hotels.dao.RoomDAO;
 import org.weeks.week5.Part2_Exercise2_Hotels.model.Hotel;
 import org.weeks.week5.Part2_Exercise2_Hotels.model.Room;
-import org.weeks.week5.part2_Vetirinarian_exercise.controllers.PatientController;
 
 import java.util.List;
 

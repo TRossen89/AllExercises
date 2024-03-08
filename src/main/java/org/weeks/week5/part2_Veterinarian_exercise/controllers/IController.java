@@ -1,4 +1,4 @@
-package org.weeks.week5.part2_Vetirinarian_exercise.controllers;
+package org.weeks.week5.part2_Veterinarian_exercise.controllers;
 
 import io.javalin.http.Handler;
 

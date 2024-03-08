@@ -1,4 +1,4 @@
-package org.weeks.week5.part2_Vetirinarian_exercise.config;
+package org.weeks.week5.part2_Veterinarian_exercise.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;

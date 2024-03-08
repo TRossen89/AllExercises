@@ -1,9 +1,9 @@
-package org.weeks.week5.part2_Vetirinarian_exercise;
+package org.weeks.week5.part2_Veterinarian_exercise;
 
 import io.javalin.apibuilder.EndpointGroup;
-import org.weeks.week5.part2_Vetirinarian_exercise.config.ApiConfig;
-import org.weeks.week5.part2_Vetirinarian_exercise.controllers.AppointmentController;
-import org.weeks.week5.part2_Vetirinarian_exercise.controllers.PatientController;
+import org.weeks.week5.part2_Veterinarian_exercise.config.ApiConfig;
+import org.weeks.week5.part2_Veterinarian_exercise.controllers.AppointmentController;
+import org.weeks.week5.part2_Veterinarian_exercise.controllers.PatientController;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 

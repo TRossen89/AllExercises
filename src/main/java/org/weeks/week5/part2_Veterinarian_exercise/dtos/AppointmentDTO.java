@@ -1,4 +1,4 @@
-package org.weeks.week5.part2_Vetirinarian_exercise.dtos;
+package org.weeks.week5.part2_Veterinarian_exercise.dtos;
 
 import lombok.Getter;
 import lombok.ToString;

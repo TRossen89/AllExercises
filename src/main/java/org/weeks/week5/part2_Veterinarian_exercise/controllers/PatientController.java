@@ -1,7 +1,7 @@
-package org.weeks.week5.part2_Vetirinarian_exercise.controllers;
+package org.weeks.week5.part2_Veterinarian_exercise.controllers;
 
 import io.javalin.http.Handler;
-import org.weeks.week5.part2_Vetirinarian_exercise.dtos.PatientDTO;
+import org.weeks.week5.part2_Veterinarian_exercise.dtos.PatientDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
