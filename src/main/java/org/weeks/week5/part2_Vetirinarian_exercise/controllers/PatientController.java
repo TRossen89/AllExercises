@@ -13,7 +13,7 @@ import java.util.Map;
 public class PatientController implements IController {
 
     private static final Map<Integer, Patient> patientMap = new HashMap<>();
-    //private static final Gson gson = new Gson();
+
 
 
 /*

@@ -48,13 +48,14 @@ public class AppointmentController {
     public Handler getUpcomingAppointments() {
 
         LocalDate dateOfToday = LocalDate.now();
+
         Map<Integer, Appointment> upcommingAppointments = appointmentMap.entrySet().stream()
                 .filter(entrySet -> entrySet.getValue().getDateOfAppointment().isAfter(dateOfToday))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        return ctx -> ctx.status(200).json(upcommingAppointments.values()).headerMap();
+        return ctx -> ctx.status(200).json(upcommingAppointments.values());
 
-        // Implement logic to retrieve a list of upcoming appointments
+
     }
 
     public Handler getById() {
@@ -70,7 +71,5 @@ public class AppointmentController {
                 ctx.attribute("message", "No appointment with id: " + id);
             }
         };
-
     }
-
 }

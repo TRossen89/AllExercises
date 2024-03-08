@@ -26,6 +26,7 @@ public class Main {
                 .startServer(7007)
                 .setRoutes(patients())
                 .setRoutes(appointments());
+
     }
 
     private static EndpointGroup patients() {
@@ -33,17 +34,22 @@ public class Main {
         return () -> {
             path("/patients", () -> {
                 get("/", patientController.getAll());
-                get("/{id}", patientController.getById());
+                path("/{id}", () -> {
+                    get(patientController.getById());
+                    delete(patientController.getById());
+                    put(patientController.getById());
+                });
             });
         };
     }
 
-    private static EndpointGroup appointments(){
+    private static EndpointGroup appointments() {
         AppointmentController appointmentController = new AppointmentController();
         return () -> {
             path("/appointments", () -> {
                 get("/upcoming", appointmentController.getUpcomingAppointments());
-                get("/{id}", appointmentController.getById());});
+                get("/{id}", appointmentController.getById());
+            });
         };
 
     }

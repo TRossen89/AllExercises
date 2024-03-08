@@ -18,6 +18,12 @@ GET http://localhost:7007/api/vet/appointments/upcoming
 GET http://localhost:7007/api/vet/appointments/2
 
 ###
+GET http://localhost:7007/api/vet/appointments/3
+
+###
+GET http://localhost:7007/api/vet/appointments/8
+
+###
 GET http://localhost:7007/api/vet/
 
 
@@ -25,5 +31,15 @@ GET http://localhost:7007/api/vet/
 GET http://localhost:7007/api/dogs
 
 ###
-POST http://localhost:7007/api/dogs/3
+POST http://localhost:7007/api/dogs/create
+Content-Type: application/json
+
+{
+  "id": 8,
+  "name": "Som",
+  "breed": "tre",
+  "gender": "female",
+  "age": 4
+}
+
 

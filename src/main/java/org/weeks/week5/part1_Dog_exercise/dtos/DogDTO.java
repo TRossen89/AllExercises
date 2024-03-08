@@ -1,13 +1,13 @@
 package org.weeks.week5.part1_Dog_exercise.dtos;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class DogDTO {
 
     private int id;
