@@ -77,4 +77,18 @@ Content-Type: application/json
   "address": "address 3"
 }
 
+###
+PUT http://localhost:7007/api/hotels/4
+Content-Type: application/json
+
+{
+  "hotelName": "Hotel 3 changed",
+  "address": "address 3"
+}
+
+###
+DELETE http://localhost:7007/api/hotels/4
+
+
+
 

@@ -86,9 +86,13 @@ public class Main {
         return () -> {
             path("/hotels", () -> {
                 get("/", hotelController.getAll());
-                get("/{id}", hotelController.getById());
-                get("/{id}/rooms", hotelController.getRoomsFromHotelByHotelId());
                 post("/", hotelController.createHotel());
+                path("/{id}", () -> {
+                    get(hotelController.getById());
+                    put(hotelController.updateHotel());
+                    delete(hotelController.deleteHotel());
+                    get("/rooms", hotelController.getRoomsFromHotelByHotelId());
+                });
             });
         };
     }

@@ -36,7 +36,7 @@ public class HotelController {
     public Handler getById(){
         return ctx -> {
 
-            int id = Integer.parseInt(ctx.pathParam("id"));
+            Long id = Long.parseLong(ctx.pathParam("id"));
 
             HotelDAO hotelDAO = new HotelDAO(emf);
 
@@ -73,6 +73,35 @@ public class HotelController {
     }
 
 
+    public Handler updateHotel() {
 
+        return ctx -> {
+            Long id = Long.parseLong(ctx.pathParam("id"));
 
+            HotelDAO hotelDAO = new HotelDAO(emf);
+            Hotel hotelBeforeUpdate = hotelDAO.getById(id);
+
+            Hotel hotel = ctx.bodyAsClass(Hotel.class);
+            hotel.setId(id);
+
+            // Should maybe be converted to a DTO list
+            Hotel hotelUpdated = hotelDAO.update(hotel);
+
+            ctx.status(201).json("Hotel updated (before update): " + hotelBeforeUpdate
+                    + "\nHotel after update: " + hotelUpdated);
+        };
+    }
+
+    public Handler deleteHotel() {
+
+        return ctx -> {
+            Long id = Long.parseLong(ctx.pathParam("id"));
+
+            HotelDAO hotelDAO = new HotelDAO(emf);
+            Hotel hotelToDelete = hotelDAO.getById(id);
+            hotelDAO.delete(hotelToDelete);
+
+            ctx.status(200).json(hotelToDelete);
+        };
+    }
 }
