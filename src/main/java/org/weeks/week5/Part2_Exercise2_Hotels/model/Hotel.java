@@ -37,6 +37,11 @@ public class Hotel {
         this.hotelName = hotelName;
         this.address = address;
     }
+    public Hotel(Long id, String hotelName, String address) {
+        this.id = id;
+        this.hotelName = hotelName;
+        this.address = address;
+    }
 
     public void addRoom(Room room){
         if(room != null){

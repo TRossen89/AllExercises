@@ -59,6 +59,9 @@ Content-Type: application/json
 }
 
 
+
+### HOTEL
+
 ###
 GET http://localhost:7007/api/hotels
 
@@ -90,5 +93,42 @@ Content-Type: application/json
 DELETE http://localhost:7007/api/hotels/4
 
 
+###
+GET http://localhost:7007/api/rooms
+
+###
+GET http://localhost:7007/api/rooms/1
 
 
+###
+POST http://localhost:7007/api/rooms
+Content-Type: application/json
+
+{
+  "number": 88,
+  "price": 1500.00,
+  "hotel": {
+    "id": 3,
+    "hotelName": "Hotel 3",
+    "address": "address 3"
+  }
+}
+
+
+###
+PUT http://localhost:7007/api/rooms/4
+Content-Type: application/json
+
+{
+  "number": 99,
+  "price": 1500.00,
+  "hotel": {
+    "id": 3,
+    "hotelName": "Hotel 3",
+    "address": "address 3"
+  }
+}
+
+
+###
+DELETE http://localhost:7007/api/rooms/2

@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import org.weeks.week5.Part2_Exercise2_Hotels.config.ApiConfig;
 import org.weeks.week5.Part2_Exercise2_Hotels.config.HibernateConfig;
 import org.weeks.week5.Part2_Exercise2_Hotels.controllers.HotelController;
+import org.weeks.week5.Part2_Exercise2_Hotels.controllers.RoomController;
 import org.weeks.week5.Part2_Exercise2_Hotels.dao.HotelDAO;
 import org.weeks.week5.Part2_Exercise2_Hotels.dao.IDAO;
 import org.weeks.week5.Part2_Exercise2_Hotels.dao.RoomDAO;
@@ -76,12 +77,13 @@ public class Main {
                 .initiateServer()
                 .errorHandling()
                 .startServer(7007)
-                .setRoutes(hotelsAndRooms());
+                .setRoutes(hotels())
+                .setRoutes(rooms());
 
 
     }
 
-    private static EndpointGroup hotelsAndRooms() {
+    private static EndpointGroup hotels() {
         HotelController hotelController = new HotelController(emf);
         return () -> {
             path("/hotels", () -> {
@@ -92,6 +94,21 @@ public class Main {
                     put(hotelController.updateHotel());
                     delete(hotelController.deleteHotel());
                     get("/rooms", hotelController.getRoomsFromHotelByHotelId());
+                });
+            });
+        };
+    }
+
+    private static EndpointGroup rooms() {
+        RoomController roomController = new RoomController(emf);
+        return () -> {
+            path("/rooms", () -> {
+                get("/", roomController.getAll());
+                post("/", roomController.create());
+                path("/{id}", () -> {
+                    get(roomController.getById());
+                    put(roomController.updateRoom());
+                    delete(roomController.deleteRoom());
                 });
             });
         };
