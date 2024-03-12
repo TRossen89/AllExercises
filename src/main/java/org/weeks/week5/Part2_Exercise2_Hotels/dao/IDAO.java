@@ -8,7 +8,7 @@ public interface IDAO <T> {
 
     List<T> getAll();
     T getById(int id);
-    abstract void create(T entity);
+    abstract T create(T entity);
     void update(T entity);
     void delete(T entity);
 }

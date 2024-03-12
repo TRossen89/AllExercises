@@ -37,7 +37,7 @@ public class DogController {
     public void createDog(Context ctx, Map<Integer, DogDTO> dogMap) {
             DogDTO newDog = ctx.bodyAsClass(DogDTO.class);
             dogMap.put(newDog.getId(), newDog);
-            ctx.status(200).json("Dog created");
+            ctx.status(201).json("Dog created");
         }
 
 

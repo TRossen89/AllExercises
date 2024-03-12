@@ -1,5 +1,6 @@
 package org.weeks.week5.Part2_Exercise2_Hotels.dao;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.weeks.week5.Part2_Exercise2_Hotels.model.Hotel;
 import org.weeks.week5.Part2_Exercise2_Hotels.model.Room;
@@ -13,6 +14,16 @@ public class RoomDAO extends DAO<Room> {
         super(emf);
     }
 
+
+    public Room create(Room entity){
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+            Long generatedId = entity.getId();
+            return em.find(Room.class, generatedId);
+        }
+    }
     public List<Room> getAll(){
 
         try(var em = emf.createEntityManager()){

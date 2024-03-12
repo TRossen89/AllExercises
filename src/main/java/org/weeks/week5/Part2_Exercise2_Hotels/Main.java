@@ -25,7 +25,7 @@ public class Main {
         emf = HibernateConfig.getEntityManagerFactoryConfig("hoteldb", false);
 
 
-        IDAO hotelDAO = new HotelDAO(emf);
+        IDAO hotelIDAO = new HotelDAO(emf);
         IDAO roomDAO = new RoomDAO(emf);
 
         Hotel hotel = new Hotel("Palads", "Some address 1");
@@ -33,41 +33,43 @@ public class Main {
         Room room = new Room(10, 1800.00);
         hotel.addRoom(room);
 
-        hotelDAO.create(hotel);
+        hotelIDAO.create(hotel);
 
         Room roomTest = new Room(11, 1200.00);
 
         Hotel hotelTest = new Hotel("Test", "Tester street 1");
         hotelTest.addRoom(roomTest);
 
-        hotelDAO.create(hotelTest);
-
-
+        hotelIDAO.create(hotelTest);
 
 
         System.out.println("\n-----------ALL HOTELS------------");
-        List<Hotel> allHotels = hotelDAO.getAll();
+        List<Hotel> allHotels = hotelIDAO.getAll();
         allHotels.forEach(System.out::println);
+
+        HotelDAO hotelDAO = new HotelDAO(emf);
+        List<Room> rooms = hotelDAO.getAllRoomsFromHotelByHotelId(2);
+        rooms.forEach(System.out::println);
+
 
         /*
 
         System.out.println("\n------------HOTEL 1------------");
-        System.out.println(hotelDAO.getById(1));
+        System.out.println(hotelIDAO.getById(1));
 
 
         System.out.println("\n-----------ALL HOTELS AFTER DELETE AND UPDATE------------");
 
-        hotelDAO.delete(hotelTest);
+        hotelIDAO.delete(hotelTest);
 
         hotel.setHotelName("PaladsUpdated");
-        hotelDAO.update(hotel);
+        hotelIDAO.update(hotel);
 
-        List<Hotel> allHotelsAfterDelete = hotelDAO.getAll();
+        List<Hotel> allHotelsAfterDelete = hotelIDAO.getAll();
 
         allHotelsAfterDelete.forEach(System.out::println);
 
  */
-
 
         ApiConfig
                 .getInstance()
@@ -82,8 +84,12 @@ public class Main {
     private static EndpointGroup hotelsAndRooms() {
         HotelController hotelController = new HotelController(emf);
         return () -> {
-            get("/", hotelController.getAll());
-
+            path("/hotels", () -> {
+                get("/", hotelController.getAll());
+                get("/{id}", hotelController.getById());
+                get("/{id}/rooms", hotelController.getRoomsFromHotelByHotelId());
+                post("/", hotelController.createHotel());
+            });
         };
     }
 }

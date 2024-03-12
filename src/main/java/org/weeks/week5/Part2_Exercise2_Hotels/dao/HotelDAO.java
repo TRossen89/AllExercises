@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.weeks.week4.part1_JPQL_ManyToOne.model.Driver;
 import org.weeks.week5.Part2_Exercise2_Hotels.model.Hotel;
+import org.weeks.week5.Part2_Exercise2_Hotels.model.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,23 @@ public class HotelDAO extends DAO<Hotel> {
         super(emf);
     }
 
+
+    public Hotel create (Hotel entity){
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+            Long generatedId = entity.getId();
+
+            return em.find(Hotel.class, generatedId);
+        }
+
+    }
+
     public List<Hotel> getAll(){
 
         try(var em = emf.createEntityManager()){
             var query = em.createQuery("SELECT a FROM Hotel a", Hotel.class);
-
-            //query.getResultList().forEach(System.out::println);
 
             return query.getResultList();
         }
@@ -29,8 +41,20 @@ public class HotelDAO extends DAO<Hotel> {
     public Hotel getById(int id) {
 
         try(var em = emf.createEntityManager()){
-            return em.find(Hotel.class, id);
+            Hotel hotel = em.find(Hotel.class, id);
+            return hotel;
         }
+    }
+
+    public List<Room> getAllRoomsFromHotelByHotelId(int id){
+
+        try(var em = emf.createEntityManager()){
+            var query = em.createQuery("SELECT r FROM Hotel a JOIN a.rooms r WHERE a.id = :id", Room.class)
+                    .setParameter("id", id);
+
+            return query.getResultList();
+        }
+
     }
 
 

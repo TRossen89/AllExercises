@@ -42,7 +42,6 @@ public class DolphinDAOTest {
         p1.addNote(n2);
 
         p1.addFee(f1);
-
         p2.addFee(f1);
 
         p3.addNote(n3);

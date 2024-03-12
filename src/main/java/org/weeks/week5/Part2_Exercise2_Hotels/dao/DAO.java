@@ -12,13 +12,7 @@ public abstract class DAO<T> implements IDAO<T> {
     public DAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    public void create (T entity){
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            em.persist(entity);
-            em.getTransaction().commit();
-        }
-    }
+
 
 
     public abstract List<T> getAll();

@@ -1,5 +1,6 @@
 package org.weeks.week5.Part2_Exercise2_Hotels.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,12 @@ import java.util.stream.Collectors;
 @Getter
 public class HotelDTO {
 
-    private int id;
+    private Long id;
     private String name;
     private String address;
+
+    @JsonIgnore
+    private List<RoomDTO> roomDTOS;
 
     public HotelDTO(Hotel hotel) {
         this.id = hotel.getId();
@@ -27,10 +31,13 @@ public class HotelDTO {
         this.address = hotel.getAddress();
     }
 
-    //private List<RoomDTO> roomDTOS;
+
 
     public static Set<HotelDTO> getEntities(List<Hotel> hotels) {
         return hotels.stream().map(hotel -> new HotelDTO(hotel)).collect(Collectors.toSet());
+    }
+    public static HotelDTO getEntity(Hotel hotel){
+        return new HotelDTO(hotel);
     }
 
 

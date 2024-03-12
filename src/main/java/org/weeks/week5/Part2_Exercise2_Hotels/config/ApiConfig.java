@@ -29,7 +29,7 @@ public class ApiConfig {
 
         app = Javalin.create(config -> {
             config.http.defaultContentType = "application/json";
-            config.routing.contextPath = "api/hotels";
+            config.routing.contextPath = "api";
         });
         return instance;
     }

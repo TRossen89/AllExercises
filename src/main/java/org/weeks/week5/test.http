@@ -62,3 +62,19 @@ Content-Type: application/json
 ###
 GET http://localhost:7007/api/hotels
 
+###
+GET http://localhost:7007/api/hotels/2
+
+###
+GET http://localhost:7007/api/hotels/2/rooms
+
+###
+POST http://localhost:7007/api/hotels
+Content-Type: application/json
+
+{
+  "hotelName": "Hotel 3",
+  "address": "address 3"
+}
+
+
