@@ -1,0 +1,32 @@
+package org.weeks.week6.Part2_Exercise2_Hotels.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.weeks.week6.Part2_Exercise2_Hotels.model.Hotel;
+
+@Getter
+@Setter
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+
+public class Room {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private int number;
+
+    private double price;
+
+    @ManyToOne
+    private Hotel hotel;
+
+    public Room(int number, double price) {
+        this.number = number;
+        this.price = price;
+    }
+
+}
+
