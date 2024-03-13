@@ -117,6 +117,30 @@ class EndpointsTest {
 
     }
 
+
+    @Test
+    void updateHotel(){
+        with()
+                .body(new Hotel("Hotel 2", "Hotel Street 2"))
+                .when()
+                .request("PUT", "http://localhost:7007/api/hotels/2")
+                .then()
+                .statusCode(201);
+
+        given()
+                .when()
+                .get("http://localhost:7007/api/hotels/2")
+                .then()
+                .statusCode(200)
+                .assertThat()
+                .body("size()", greaterThan(0))
+                .assertThat()
+                .body("id", is(2))
+                .assertThat()
+                .body("name", equalTo("Hotel 2"));
+
+    }
+
     @Test
     void rooms() {
     }
