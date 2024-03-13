@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.weeks.week6.Part2_Exercise2_Hotels.dtos.HotelDTO;
 import org.weeks.week6.Part2_Exercise2_Hotels.model.Hotel;
 import org.weeks.week6.Part2_Exercise2_Hotels.model.Room;
 import org.weeks.week6.Part2_Exercise2_Hotels.persistence.HibernateConfig;
@@ -22,7 +23,7 @@ class EndpointsTest {
     static EntityManagerFactory emfTest;
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
 
         emfTest = HibernateConfig.getEntityManagerFactoryConfig("week6", true);
 
@@ -42,6 +43,7 @@ class EndpointsTest {
         hotelIDAO.create(hotelTest);
 
     }
+
     @BeforeEach
     void setUp() {
         ApiConfig
@@ -78,7 +80,7 @@ class EndpointsTest {
     }
 
     @Test
-    void hotelById(){
+    void hotelById() {
 
         given()
                 .when()
@@ -97,7 +99,7 @@ class EndpointsTest {
     }
 
     @Test
-    void createHotel(){
+    void createHotel() {
         with()
                 .body(new Hotel("Hotel 5", "Hotel Street 5"))
                 .when()
@@ -119,7 +121,7 @@ class EndpointsTest {
 
 
     @Test
-    void updateHotel(){
+    void updateHotel() {
         with()
                 .body(new Hotel("Hotel 2", "Hotel Street 2"))
                 .when()
@@ -138,6 +140,20 @@ class EndpointsTest {
                 .body("id", is(2))
                 .assertThat()
                 .body("name", equalTo("Hotel 2"));
+
+    }
+
+    @Test
+    void deleteHotel() {
+        given()
+                .when()
+                .request("DELETE", "http://localhost:7007/api/hotels/2")
+                .then()
+                .statusCode(200)
+                .body("id", is(2))
+                .body("hotelName", equalTo("Test"))
+                .body("address", equalTo("Tester street 1"));
+
 
     }
 

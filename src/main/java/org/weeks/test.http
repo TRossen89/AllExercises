@@ -90,7 +90,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:7007/api/hotels/4
+DELETE http://localhost:7007/api/hotels/2
 
 
 ###

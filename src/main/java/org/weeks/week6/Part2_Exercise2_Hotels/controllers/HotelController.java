@@ -95,10 +95,13 @@ public class HotelController {
             Long id = Long.parseLong(ctx.pathParam("id"));
 
             HotelDAO hotelDAO = new HotelDAO(emf);
+
             Hotel hotelToDelete = hotelDAO.getById(id);
+            HotelDTO hotelDeleted = new HotelDTO(hotelToDelete);
+
             hotelDAO.delete(hotelToDelete);
 
-            ctx.status(200).json(hotelToDelete);
+            ctx.status(200).json(hotelDeleted);
         };
     }
 }
