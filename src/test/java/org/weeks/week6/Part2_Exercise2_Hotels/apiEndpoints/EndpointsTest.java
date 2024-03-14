@@ -46,6 +46,8 @@ class EndpointsTest {
 
     @BeforeEach
     void setUp() {
+
+
         ApiConfig
                 .getInstance()
                 .initiateServer()
@@ -69,12 +71,13 @@ class EndpointsTest {
                 .get("http://localhost:7007/api/hotels")
                 .then()
                 .statusCode(200)
-                .assertThat()
                 .body("size()", greaterThan(0))
-                .assertThat()
                 .body("id", hasItem(1))
-                .assertThat()
-                .body("name", hasItem("Test"));
+                .body("hotelName", hasItem("Test"))
+                .body("hotelName", hasItem("Palads"))
+                // This is not useful because the elements are returned in random order
+                .body("[1].id", equalTo(2));
+
 
 
     }
@@ -87,13 +90,13 @@ class EndpointsTest {
                 .get("http://localhost:7007/api/hotels/2")
                 .then()
                 .statusCode(200)
-                .assertThat()
+
                 .body("size()", greaterThan(0))
-                .assertThat()
+
                 .body("id", is(2))
-                .assertThat()
+
                 .body("name", equalTo("Test"))
-                .assertThat()
+
                 .body("address", is("Tester street 1"));
 
     }
@@ -112,9 +115,7 @@ class EndpointsTest {
                 .get("http://localhost:7007/api/hotels/3")
                 .then()
                 .statusCode(200)
-                .assertThat()
                 .body("size()", greaterThan(0))
-                .assertThat()
                 .body("id", is(3));
 
     }
@@ -134,7 +135,6 @@ class EndpointsTest {
                 .get("http://localhost:7007/api/hotels/2")
                 .then()
                 .statusCode(200)
-                .assertThat()
                 .body("size()", greaterThan(0))
                 .assertThat()
                 .body("id", is(2))
