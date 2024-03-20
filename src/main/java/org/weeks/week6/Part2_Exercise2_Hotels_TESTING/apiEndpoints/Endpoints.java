@@ -1,9 +1,9 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.apiEndpoints;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.apiEndpoints;
 
 import io.javalin.apibuilder.EndpointGroup;
 import jakarta.persistence.EntityManagerFactory;
-import org.weeks.week6.Part2_Exercise2_Hotels.controllers.HotelController;
-import org.weeks.week6.Part2_Exercise2_Hotels.controllers.RoomController;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.controllers.HotelController;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.controllers.RoomController;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 

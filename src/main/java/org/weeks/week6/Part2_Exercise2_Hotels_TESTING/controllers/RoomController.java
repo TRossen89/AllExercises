@@ -1,12 +1,12 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.controllers;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.controllers;
 
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 import jakarta.persistence.EntityManagerFactory;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.IDAO;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.RoomDAO;
-import org.weeks.week6.Part2_Exercise2_Hotels.dtos.RoomDTO;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Room;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.IDAO;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.RoomDAO;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.dtos.RoomDTO;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Room;
 
 import java.util.List;
 

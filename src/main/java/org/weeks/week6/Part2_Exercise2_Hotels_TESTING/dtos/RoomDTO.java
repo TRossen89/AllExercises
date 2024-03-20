@@ -1,10 +1,10 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.dtos;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Room;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Room;
 
 import java.util.List;
 import java.util.Set;

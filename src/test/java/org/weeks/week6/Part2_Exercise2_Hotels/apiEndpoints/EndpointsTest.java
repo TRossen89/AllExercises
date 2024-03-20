@@ -5,19 +5,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.weeks.week6.Part2_Exercise2_Hotels.dtos.HotelDTO;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Hotel;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Room;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.HibernateConfig;
-import org.weeks.week6.Part2_Exercise2_Hotels.config.ApiConfig;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.HotelDAO;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.IDAO;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.RoomDAO;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.apiEndpoints.Endpoints;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Hotel;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Room;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.HibernateConfig;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.config.ApiConfig;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.HotelDAO;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.IDAO;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class EndpointsTest {
     static EntityManagerFactory emfTest;

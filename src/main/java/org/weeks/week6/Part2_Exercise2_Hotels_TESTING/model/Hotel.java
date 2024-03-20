@@ -1,5 +1,4 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.model;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Room;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

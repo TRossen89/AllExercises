@@ -1,4 +1,4 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.persistence;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence;
 
 
 import jakarta.persistence.EntityManagerFactory;
@@ -7,8 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Hotel;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Room;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Hotel;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Room;
 
 import java.util.Properties;
 

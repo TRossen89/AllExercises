@@ -1,4 +1,4 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.config;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.config;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.persistence;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence;
 
 import jakarta.persistence.EntityManagerFactory;
 

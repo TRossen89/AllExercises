@@ -1,21 +1,17 @@
-package org.weeks.week6.Part2_Exercise2_Hotels;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING;
 
-import io.javalin.apibuilder.EndpointGroup;
 import jakarta.persistence.EntityManagerFactory;
-import org.weeks.week6.Part2_Exercise2_Hotels.apiEndpoints.Endpoints;
-import org.weeks.week6.Part2_Exercise2_Hotels.config.ApiConfig;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.HibernateConfig;
-import org.weeks.week6.Part2_Exercise2_Hotels.controllers.HotelController;
-import org.weeks.week6.Part2_Exercise2_Hotels.controllers.RoomController;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.HotelDAO;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.IDAO;
-import org.weeks.week6.Part2_Exercise2_Hotels.persistence.RoomDAO;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Hotel;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Room;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.apiEndpoints.Endpoints;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.config.ApiConfig;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.HibernateConfig;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.HotelDAO;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.IDAO;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.RoomDAO;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Hotel;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Room;
 
 import java.util.List;
 
-import static io.javalin.apibuilder.ApiBuilder.*;
 import static io.javalin.apibuilder.ApiBuilder.put;
 
 public class Main {

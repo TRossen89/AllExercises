@@ -1,10 +1,10 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.persistence;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Hotel;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Room;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Hotel;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Room;
 
 import java.util.List;
 

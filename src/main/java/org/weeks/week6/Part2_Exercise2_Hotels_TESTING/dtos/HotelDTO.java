@@ -1,11 +1,11 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.dtos;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.weeks.week6.Part2_Exercise2_Hotels.model.Hotel;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Hotel;
 
 import java.util.List;
 import java.util.Set;

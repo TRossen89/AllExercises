@@ -1,11 +1,12 @@
-package org.weeks.week6.Part2_Exercise2_Hotels.persistence;
+package org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.model.Room;
 
 import java.util.List;
 
-public class RoomDAO extends DAO<org.weeks.week6.Part2_Exercise2_Hotels.model.Room> {
+public class RoomDAO extends DAO<Room> {
 
 
     public RoomDAO(EntityManagerFactory emf) {
@@ -13,32 +14,32 @@ public class RoomDAO extends DAO<org.weeks.week6.Part2_Exercise2_Hotels.model.Ro
     }
 
 
-    public org.weeks.week6.Part2_Exercise2_Hotels.model.Room create(org.weeks.week6.Part2_Exercise2_Hotels.model.Room entity){
+    public Room create(Room entity){
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
             Long generatedId = entity.getId();
-            return em.find(org.weeks.week6.Part2_Exercise2_Hotels.model.Room.class, generatedId);
+            return em.find(Room.class, generatedId);
         }
     }
-    public List<org.weeks.week6.Part2_Exercise2_Hotels.model.Room> getAll(){
+    public List<Room> getAll(){
 
         try(var em = emf.createEntityManager()){
-            var query = em.createQuery("SELECT a FROM Room a", org.weeks.week6.Part2_Exercise2_Hotels.model.Room.class);
+            var query = em.createQuery("SELECT a FROM Room a", Room.class);
             return query.getResultList();
         }
     }
 
     @Override
-    public org.weeks.week6.Part2_Exercise2_Hotels.model.Room getById(Long id) {
+    public Room getById(Long id) {
 
         try(var em = emf.createEntityManager()){
-            return em.find(org.weeks.week6.Part2_Exercise2_Hotels.model.Room.class, id);
+            return em.find(Room.class, id);
         }
     }
 
-    public org.weeks.week6.Part2_Exercise2_Hotels.model.Room update(org.weeks.week6.Part2_Exercise2_Hotels.model.Room entity){
+    public Room update(Room entity){
         try (var em = emf.createEntityManager()) {
 
             em.getTransaction().begin();
@@ -50,7 +51,7 @@ public class RoomDAO extends DAO<org.weeks.week6.Part2_Exercise2_Hotels.model.Ro
             em.getTransaction().commit();
 
             Long idFromUpdatedEntity = entity.getId();
-            return em.find(org.weeks.week6.Part2_Exercise2_Hotels.model.Room.class, idFromUpdatedEntity);
+            return em.find(Room.class, idFromUpdatedEntity);
 
         }
     }
