@@ -132,3 +132,15 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:7007/api/rooms/2
+
+
+
+###
+POST http://localhost:7007/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "Tobias",
+  "password": "1234"
+
+}

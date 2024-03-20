@@ -3,8 +3,9 @@ package org.weeks.week6.Security.persistence.daos;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
-import org.weeks.week6.Part2_Exercise2_Hotels_TESTING.persistence.HibernateConfig;
+import org.weeks.week6.Security.persistence.HibernateConfig;
 import org.weeks.week6.Security.exceptions.ValidationException;
+import org.weeks.week6.Security.model.Role;
 import org.weeks.week6.Security.model.User;
 
 public class SecurityDao {
@@ -35,6 +36,30 @@ public class SecurityDao {
             if (!user.verifyPassword(password)) {
                 throw new ValidationException("Wrong password");
             }
+
+            return user;
+        }
+    }
+
+    public User createUser(String username, String password) {
+
+        try (EntityManager em = emf.createEntityManager()) {
+
+            em.getTransaction().begin();
+
+            User user = new User(username, password);
+
+            Role userRole = em.find(Role.class, "user");
+
+            if (userRole == null) {
+                userRole = new Role("user");
+                em.persist(userRole);
+            }
+            user.addRole(userRole);
+
+            em.persist(user);
+
+            em.getTransaction().commit();
 
             return user;
         }

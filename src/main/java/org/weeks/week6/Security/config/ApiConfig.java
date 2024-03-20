@@ -18,8 +18,8 @@ import static io.javalin.apibuilder.ApiBuilder.path;
 public class ApiConfig {
 
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-    private SecurityController securityController = new SecurityController();
+    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static SecurityController securityController = SecurityController.getInstance();
     private static ApiConfig instance;
     private static Javalin app;
 
@@ -49,7 +49,6 @@ public class ApiConfig {
         app.updateConfig(config -> {
 
             config.accessManager((handler, ctx, permittedRoles) -> {
-
 
                 Set<String> allowedRoles = permittedRoles.stream().map(role -> role.toString().toUpperCase()).collect(Collectors.toSet());
 
@@ -102,6 +101,29 @@ public class ApiConfig {
             ctx.json(message);
         });
 
+        return instance;
+    }
+
+
+    public ApiConfig setApiExceptionHandling() {
+        // Might be overruled by the setErrorHandling method
+        app.exception(ApiException.class, (e, ctx) -> {
+            int statusCode = e.getStatusCode();
+            System.out.println("Status code: " + statusCode + ", Message: " + e.getMessage());
+            var on = objectMapper
+                    .createObjectNode()
+                    .put("status", statusCode)
+                    .put("msg", e.getMessage());
+            ctx.json(on);
+            ctx.status(statusCode);
+        });
+        return instance;
+    }
+    public ApiConfig setGeneralExceptionHandling(){
+        app.exception(Exception.class, (e,ctx)->{
+            e.printStackTrace();
+            ctx.result(e.getMessage());
+        });
         return instance;
     }
 

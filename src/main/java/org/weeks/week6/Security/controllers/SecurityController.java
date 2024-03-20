@@ -4,19 +4,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 import io.javalin.http.Handler;
+import io.javalin.http.HttpStatus;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
+import org.weeks.week6.Security.dtos.TokenDTO;
 import org.weeks.week6.Security.dtos.UserDTO;
 import org.weeks.week6.Security.exceptions.ApiException;
+import org.weeks.week6.Security.exceptions.NotAuthorizedException;
+import org.weeks.week6.Security.exceptions.ValidationException;
 import org.weeks.week6.Security.model.User;
 import org.weeks.week6.Security.persistence.daos.SecurityDao;
 
+import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class SecurityController {
-
 
     private static SecurityController instance;
 
@@ -28,12 +38,29 @@ public class SecurityController {
 
 
     public static SecurityController getInstance() {
-        if (instance != null) {
+        if (instance == null) {
             instance = new SecurityController();
         }
         return instance;
     }
 
+    public Handler register() {
+        return ctx -> {
+            ObjectNode returnObject = objectMapper.createObjectNode();
+
+            try {
+                UserDTO userInput = ctx.bodyAsClass(UserDTO.class);
+                User created = securityDao.createUser(userInput.getUsername(), userInput.getPassword());
+
+                String token = createToken(new UserDTO(created));
+                ctx.status(HttpStatus.CREATED).json(new TokenDTO(token, userInput.getUsername()));
+
+            } catch (EntityExistsException e) {
+                ctx.status(HttpStatus.UNPROCESSABLE_CONTENT);
+                ctx.json(returnObject.put("msg", "User already exists"));
+            }
+        };
+    }
 
     public Handler login() {
 
@@ -45,14 +72,19 @@ public class SecurityController {
 
                 User verifiedUser = securityDao.getVerifiedUser(userDTO.getUsername(), userDTO.getPassword());
                 String token = createToken(new UserDTO(verifiedUser));
+                ctx.status(200).json(new TokenDTO(token, userDTO.getUsername()));
 
+            } catch (EntityNotFoundException | ValidationException e) {
+                ctx.status(401);
+                System.out.println(e.getMessage());
+                ctx.json(returnObject.put("msg", e.getMessage()));
             }
-
         };
     }
 
 
     public String createToken(UserDTO userDTO) {
+
         String ISSUER;
         String TOKEN_EXPIRE_TIME;
         String SECRET_KEY;
@@ -62,6 +94,7 @@ public class SecurityController {
                 ISSUER = System.getenv("ISSUER");
                 TOKEN_EXPIRE_TIME = System.getenv("TOKEN_EXPIRE_TIME");
                 SECRET_KEY = System.getenv("SECRET_KEY");
+
             } else{
                 ISSUER = "Thomas Hartmann";
                 TOKEN_EXPIRE_TIME = "1800000"; // 30 minutes in milliseconds
@@ -85,7 +118,9 @@ public class SecurityController {
             JWSSigner signer = new MACSigner(SECRET_KEY);
             JWSHeader jwsHeader = new JWSHeader(JWSAlgorithm.HS256);
             JWSObject jwsObject = new JWSObject(jwsHeader, payload);
+
             jwsObject.sign(signer);
+
             return jwsObject.serialize();
 
         } catch (JOSEException e) {
@@ -107,4 +142,86 @@ public class SecurityController {
             }
             return hasAccess.get();
         }
+
+    public Handler authenticate() {
+        // To check the users roles against the allowed roles for the endpoint (managed by javalins accessManager)
+        // Checked in 'before filter' -> Check for Authorization header to find token.
+        // Find user inside the token, forward the ctx object with userDTO on attribute
+        // When ctx hits the endpoint it will have the user on the attribute to check for roles (ApplicationConfig -> accessManager)
+
+        ObjectNode returnObject = objectMapper.createObjectNode();
+
+        return (ctx) -> {
+            if(ctx.method().toString().equals("OPTIONS")) {
+                ctx.status(200);
+                return;
+            }
+            String header = ctx.header("Authorization");
+            if (header == null) {
+                ctx.status(HttpStatus.FORBIDDEN).json(returnObject.put("msg", "Authorization header missing"));
+                return;
+            }
+            String token = header.split(" ")[1];
+            if (token == null) {
+                ctx.status(HttpStatus.FORBIDDEN).json(returnObject.put("msg", "Authorization header malformed"));
+                return;
+            }
+            UserDTO verifiedTokenUser = verifyToken(token);
+
+            if (verifiedTokenUser == null) {
+                ctx.status(HttpStatus.FORBIDDEN).json(returnObject.put("msg", "Invalid User or Token"));
+            }
+            System.out.println("USER IN AUTHENTICATE: " + verifiedTokenUser);
+            ctx.attribute("user", verifiedTokenUser);
+        };
     }
+
+
+    public UserDTO verifyToken(String token) {
+
+        boolean IS_DEPLOYED = (System.getenv("DEPLOYED") != null);
+
+        String SECRET = IS_DEPLOYED ? System.getenv("SECRET_KEY") : SECRET_KEY;
+
+        try {
+            if (tokenIsValid(token, SECRET) && tokenNotExpired(token)) {
+                return getUserWithRolesFromToken(token);
+            } else {
+                throw new NotAuthorizedException(403, "Token is not valid");
+            }
+        } catch (ParseException | JOSEException | NotAuthorizedException e) {
+            e.printStackTrace();
+            throw new ApiException(HttpStatus.UNAUTHORIZED.getCode(), "Unauthorized. Could not verify token");
+        }
+    }
+    public boolean tokenIsValid(String token, String secret) throws ParseException, JOSEException, NotAuthorizedException{
+        SignedJWT jwt = SignedJWT.parse(token);
+
+        if (jwt.verify(new MACVerifier(secret)))
+            return true;
+        else
+            throw new NotAuthorizedException(403, "Token is not valid");
+    }
+    public boolean tokenNotExpired(String token) throws ParseException, NotAuthorizedException {
+        if (timeToExpire(token) > 0)
+            return true;
+        else
+            throw new NotAuthorizedException(403, "Token has expired");
+    }
+    public UserDTO getUserWithRolesFromToken(String token) throws ParseException {
+        // Return a user with Set of roles as strings
+        SignedJWT jwt = SignedJWT.parse(token);
+        String roles = jwt.getJWTClaimsSet().getClaim("roles").toString();
+        String username = jwt.getJWTClaimsSet().getClaim("username").toString();
+
+        Set<String> rolesSet = Arrays
+                .stream(roles.split(","))
+                .collect(Collectors.toSet());
+        return new UserDTO(username, rolesSet);
+    }
+    public int timeToExpire(String token) throws ParseException, NotAuthorizedException {
+        SignedJWT jwt = SignedJWT.parse(token);
+        return (int) (jwt.getJWTClaimsSet().getExpirationTime().getTime() - new Date().getTime());
+    }
+
+}

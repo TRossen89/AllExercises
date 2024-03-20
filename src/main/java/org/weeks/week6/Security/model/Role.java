@@ -19,13 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Role implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
-
-
-    @Basic(optional = false)
-    @Column(name = "name", length = 20)
+    @Column(name = "name", nullable = false, unique = true, length = 20)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
