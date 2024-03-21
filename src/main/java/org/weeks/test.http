@@ -144,18 +144,19 @@ POST http://localhost:7007/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "Tobias",
-  "password": "1234"
+  "username": "Finn",
+  "password": "1234",
+  "roles": ["user"]
 
 }
 
 
 ###
-POST http://localhost:7007/api/auth/register
+POST http://localhost:7007/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "Tobias",
+  "username": "Jonas",
   "password": "1234"
 
 }
@@ -169,3 +170,23 @@ Content-Type: application/json
   "password": "1234"
 
 }
+
+
+###
+GET http://localhost:7007/api/protected/hotels
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaG9tYXMgSGFydG1hbm4iLCJzdWIiOiJGaW5uIiwiZXhwIjoxNzExMDM1ODc4LCJyb2xlcyI6Iix1c2VyIiwidXNlcm5hbWUiOiJGaW5uIn0.9GiLY6XEur-c9zHI3oEpk95LTmGjeFwV-tmTs9hKz7o
+
+
+###
+POST http://localhost:7007/api/protected/hotels
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaG9tYXMgSGFydG1hbm4iLCJzdWIiOiJGaW5uIiwiZXhwIjoxNzExMDM1ODc4LCJyb2xlcyI6Iix1c2VyIiwidXNlcm5hbWUiOiJGaW5uIn0.9GiLY6XEur-c9zHI3oEpk95LTmGjeFwV-tmTs9hKz7o
+Content-Type: application/json
+
+{
+  "hotelName": "Hotel 4",
+  "address": "address 4"
+}
+
+###
+GET http://localhost:7007/api/protected/user_demo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.yJpc3MiOiJUaG9tYXMgSGFydG1hbm4iLCJzdWIiOiJUb2JpYXMiLCJleHAiOjE3MTEwMzE1NDQsInJvbGVzIjoiLGFkbWluLHVzZXIiLCJ1c2VybmFtZSI6IlRvYmlhcyJ9.2Ev_qsAFxSmReEupFgWpJl3HOrmdxA5q3LSnk9jkkCc

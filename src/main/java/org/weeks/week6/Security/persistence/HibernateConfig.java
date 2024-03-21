@@ -7,7 +7,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.weeks.week6.Security.model.Hotel;
 import org.weeks.week6.Security.model.Role;
+import org.weeks.week6.Security.model.Room;
 import org.weeks.week6.Security.model.User;
 
 
@@ -81,6 +83,8 @@ public class HibernateConfig {
         // add annotated classes
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Role.class);
+        configuration.addAnnotatedClass(Hotel.class);
+        configuration.addAnnotatedClass(Room.class);
 
     }
 

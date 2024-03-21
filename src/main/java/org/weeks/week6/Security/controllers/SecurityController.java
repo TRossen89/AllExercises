@@ -17,7 +17,7 @@ import org.weeks.week6.Security.exceptions.ApiException;
 import org.weeks.week6.Security.exceptions.NotAuthorizedException;
 import org.weeks.week6.Security.exceptions.ValidationException;
 import org.weeks.week6.Security.model.User;
-import org.weeks.week6.Security.persistence.daos.SecurityDao;
+import org.weeks.week6.Security.persistence.daos.UserDao;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -26,13 +26,13 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-public class SecurityController {
+public class SecurityController implements ISecurityController{
 
     private static SecurityController instance;
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
-    private static SecurityDao securityDao = new SecurityDao();
+    private static UserDao userDao = new UserDao();
 
     private final String SECRET_KEY = "DetteErEnHemmeligNøgleTilAtDanneJWT_TokensMed";
 
@@ -50,7 +50,7 @@ public class SecurityController {
 
             try {
                 UserDTO userInput = ctx.bodyAsClass(UserDTO.class);
-                User created = securityDao.createUser(userInput.getUsername(), userInput.getPassword());
+                User created = userDao.createUser(userInput.getUsername(), userInput.getPassword(), userInput.getRoles());
 
                 String token = createToken(new UserDTO(created));
                 ctx.status(HttpStatus.CREATED).json(new TokenDTO(token, userInput.getUsername()));
@@ -70,7 +70,7 @@ public class SecurityController {
             try {
                 UserDTO userDTO = ctx.bodyAsClass(UserDTO.class);
 
-                User verifiedUser = securityDao.getVerifiedUser(userDTO.getUsername(), userDTO.getPassword());
+                User verifiedUser = userDao.getVerifiedUser(userDTO.getUsername(), userDTO.getPassword());
                 String token = createToken(new UserDTO(verifiedUser));
                 ctx.status(200).json(new TokenDTO(token, userDTO.getUsername()));
 
@@ -181,10 +181,10 @@ public class SecurityController {
 
         boolean IS_DEPLOYED = (System.getenv("DEPLOYED") != null);
 
-        String SECRET = IS_DEPLOYED ? System.getenv("SECRET_KEY") : SECRET_KEY;
+        String SECRET_K = IS_DEPLOYED ? System.getenv("SECRET_KEY") : SECRET_KEY;
 
         try {
-            if (tokenIsValid(token, SECRET) && tokenNotExpired(token)) {
+            if (tokenIsValid(token, SECRET_K) && tokenNotExpired(token)) {
                 return getUserWithRolesFromToken(token);
             } else {
                 throw new NotAuthorizedException(403, "Token is not valid");

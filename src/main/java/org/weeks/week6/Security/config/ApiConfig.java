@@ -1,7 +1,5 @@
 package org.weeks.week6.Security.config;
 
-
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
 import io.javalin.apibuilder.EndpointGroup;

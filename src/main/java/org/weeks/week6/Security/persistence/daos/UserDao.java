@@ -8,12 +8,14 @@ import org.weeks.week6.Security.exceptions.ValidationException;
 import org.weeks.week6.Security.model.Role;
 import org.weeks.week6.Security.model.User;
 
-public class SecurityDao {
+import java.util.Set;
+
+public class UserDao {
 
 
     private EntityManagerFactory emf;
 
-    public SecurityDao() {
+    public UserDao() {
 
         this.emf = HibernateConfig.getEntityManagerFactoryConfig("securitydb", false);
     }
@@ -41,7 +43,7 @@ public class SecurityDao {
         }
     }
 
-    public User createUser(String username, String password) {
+    public User createUser(String username, String password, Set<String> roles) {
 
         try (EntityManager em = emf.createEntityManager()) {
 
@@ -49,19 +51,55 @@ public class SecurityDao {
 
             User user = new User(username, password);
 
-            Role userRole = em.find(Role.class, "user");
-
-            if (userRole == null) {
-                userRole = new Role("user");
-                em.persist(userRole);
+            for (String role : roles){
+                Role userRole = em.find(Role.class, role);
+                user.addRole(userRole);
             }
-            user.addRole(userRole);
 
             em.persist(user);
 
             em.getTransaction().commit();
 
             return user;
+        }
+    }
+
+    public User createUser(User user) {
+
+        try (EntityManager em = emf.createEntityManager()) {
+
+            em.getTransaction().begin();
+
+            em.persist(user);
+
+            em.getTransaction().commit();
+
+            return user;
+        }
+    }
+
+    public void addRoleToUser(Role role, User user){
+
+        try(EntityManager em = emf.createEntityManager()){
+
+            em.getTransaction().begin();
+
+            user.addRole(role);
+
+            em.merge(user);
+
+            em.getTransaction().commit();
+        }
+
+
+    }
+    public void createRole(Role role){
+
+        try(EntityManager em = emf.createEntityManager()){
+
+            em.getTransaction().begin();
+            em.persist(role);
+            em.getTransaction().commit();
         }
     }
 }
